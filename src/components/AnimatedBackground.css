@@ -1,0 +1,227 @@
+/* Animated Background Styles */
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Floating Geometric Shapes */
+.floating-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.shape {
+  position: absolute;
+  opacity: 0.1;
+  animation: float linear infinite;
+}
+
+.shape-0 {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  border-radius: 50%;
+}
+
+.shape-1 {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+  transform: rotate(45deg);
+}
+
+.shape-2 {
+  width: 35px;
+  height: 35px;
+  background: linear-gradient(225deg, var(--accent-color), var(--primary-color));
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.shape-3 {
+  width: 25px;
+  height: 25px;
+  background: linear-gradient(315deg, var(--primary-color), var(--secondary-color));
+  border-radius: 20% 50% 30% 40%;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+  }
+}
+
+/* Gradient Orbs */
+.gradient-orbs {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: orb-float 20s ease-in-out infinite;
+}
+
+.orb-0 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%);
+}
+
+.orb-1 {
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
+}
+
+.orb-2 {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.3) 0%, transparent 70%);
+}
+
+@keyframes orb-float {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  25% {
+    transform: translate(100px, -50px) scale(1.1);
+  }
+  50% {
+    transform: translate(-50px, 100px) scale(0.9);
+  }
+  75% {
+    transform: translate(-100px, -100px) scale(1.05);
+  }
+}
+
+/* Particles */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: particle-float linear infinite;
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(50px);
+    opacity: 0;
+  }
+}
+
+/* Code Lines */
+.code-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+}
+
+.code-line {
+  position: absolute;
+  width: 100%;
+  opacity: 0.05;
+  animation: code-scroll 15s linear infinite;
+  color: var(--primary-color);
+}
+
+.code-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: text-slide 15s linear infinite;
+}
+
+@keyframes code-scroll {
+  0% {
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 0.05;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes text-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .shape {
+  opacity: 0.15;
+}
+
+[data-theme="dark"] .orb-0 {
+  background: radial-gradient(circle, rgba(139, 69, 19, 0.3) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .orb-1 {
+  background: radial-gradient(circle, rgba(75, 0, 130, 0.4) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .orb-2 {
+  background: radial-gradient(circle, rgba(25, 25, 112, 0.3) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .particle {
+  background: var(--accent-color);
+  opacity: 0.8;
+}
+
+[data-theme="dark"] .code-line {
+  opacity: 0.08;
+  color: var(--accent-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .shape {
+    opacity: 0.08;
+  }
+  
+  .orb {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .code-line {
+    opacity: 0.03;
+    font-size: 10px;
+  }
+}

@@ -1,34 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
+import { ThemeProvider } from './contexts/ThemeContext'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import About from './components/About'
+import Projects from './components/Projects'
+import Skills from './components/Skills'
+import Contact from './components/Contact'
+import AnimatedBackground from './components/AnimatedBackground'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeSection, setActiveSection] = useState('hero')
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['hero', 'about', 'projects', 'skills', 'contact']
+      const scrollPosition = window.scrollY + 100
+
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const { offsetTop, offsetHeight } = element
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <ThemeProvider>
+      <div className="portfolio">
+        <AnimatedBackground />
+        <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
+        <main className="main-content">
+          <Hero />
+          <Projects />
+          <About />
+          <Skills />
+          <Contact />
+        </main>
+        <footer className="footer">
+          <div className="footer-content">
+            <p>&copy; 2025 cbsdan. All rights reserved.</p>
+          </div>
+        </footer>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </ThemeProvider>
   )
 }
 
