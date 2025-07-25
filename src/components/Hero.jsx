@@ -86,7 +86,9 @@ const Hero = () => {
           <div className="profile-card">
             <div className="profile-avatar">
               <div className="avatar-placeholder">
-                <span>👨‍💻</span>
+                <span>
+                  <img src="/logo.png" alt="Profile" className="avatar-image" />
+                </span>
               </div>
             </div>
             <div className="profile-info">
@@ -112,10 +114,7 @@ const Hero = () => {
           </a>
         ))}
       </div>
-      
-      <div className="scroll-indicator">
-        <div className="scroll-arrow"></div>
-      </div>
+    
     </section>
   )
 }

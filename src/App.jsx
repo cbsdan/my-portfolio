@@ -11,11 +11,17 @@ import './App.css'
 
 function App() {
   const [activeSection, setActiveSection] = useState('hero')
+  const [showScrollTop, setShowScrollTop] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['hero', 'about', 'projects', 'skills', 'contact']
       const scrollPosition = window.scrollY + 100
+
+      // Show/hide scroll to top button - hide if in hero section or at top
+      const shouldShow = window.scrollY > 300 && activeSection !== 'hero'
+      setShowScrollTop(shouldShow)
+      console.log('Scroll Y:', window.scrollY, 'Active section:', activeSection, 'Show button:', shouldShow) // Debug log
 
       for (const section of sections) {
         const element = document.getElementById(section)
@@ -31,7 +37,13 @@ function App() {
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [activeSection])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  console.log('showScrollTop state:', showScrollTop) // Debug log
 
   return (
     <ThemeProvider>
@@ -50,6 +62,15 @@ function App() {
             <p>&copy; 2025 cbsdan. All rights reserved.</p>
           </div>
         </footer>
+        
+        {/* Scroll to Top Button */}
+        <button 
+          className={`scroll-to-top ${showScrollTop ? 'visible' : ''}`}
+          onClick={scrollToTop}
+          aria-label="Scroll to top"
+        >
+          ↑
+        </button>
       </div>
     </ThemeProvider>
   )

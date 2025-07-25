@@ -15,9 +15,9 @@ const Navbar = ({ activeSection, setActiveSection }) => {
 
   const navItems = [
     { id: 'hero', label: 'Home' },
-    { id: 'about', label: 'About' },
     { id: 'projects', label: 'Projects' },
-    { id: 'skills', label: 'Skills' },
+    { id: 'about', label: 'About', hideOnMobile: true },
+    { id: 'skills', label: 'Skills', hideOnMobile: true },
     { id: 'contact', label: 'Contact' }
   ]
 
@@ -42,7 +42,7 @@ const Navbar = ({ activeSection, setActiveSection }) => {
         {navItems.map((item) => (
           <button
             key={item.id}
-            className={activeSection === item.id ? 'active' : ''}
+            className={`${activeSection === item.id ? 'active' : ''} ${item.hideOnMobile ? 'hide-mobile' : ''}`}
             onClick={() => scrollToSection(item.id)}
           >
             {item.label}

@@ -1,191 +1,102 @@
-# My Portfolio
+# CBSDAN Portfolio
 
-A modern, responsive single-page portfolio website for full-stack software developers built with React and Vite.
+A modern, responsive portfolio website showcasing the work and skills of **CBSDAN** - a passionate full-stack developer specializing in innovative web solutions.
 
-## ✨ Features
+## 👨‍💻 About CBSDAN
 
-- **🎨 Modern Design** - Gradient backgrounds, smooth animations, and contemporary UI
-- **📱 Fully Responsive** - Optimized for mobile, tablet, and desktop
-- **⚡ Single Page App** - Smooth scrolling navigation between sections
-- **🎭 Rich Animations** - Fade-in effects, floating elements, and interactive hover states
-- **📄 Resume Integration** - PDF preview and download functionality
-- **🔗 Direct Contact** - Email, LinkedIn, GitHub, and social media links
-- **🎯 Professional** - Clean code structure with modular components
-- **⚡ Fast Performance** - Powered by Vite for lightning-fast development
+I'm a dedicated software developer with expertise in modern web technologies, creating dynamic and user-friendly applications. My passion lies in building efficient, scalable solutions that solve real-world problems and deliver exceptional user experiences.
 
-## 🏗️ Project Structure
+### 🎯 Core Expertise
+- **Frontend Development**: React, JavaScript, CSS3, HTML5, Bootstrap
+- **Backend Development**: Node.js, Express, RESTful APIs
+- **Database Management**: MongoDB, PostgreSQL, MySQL
+- **Development Tools**: Git, Vite, VS Code, npm/yarn
+- **Design Skills**: Responsive design, UI/UX principles, modern CSS
 
-```
-src/
-├── components/
-│   ├── Navbar.jsx       # Navigation with scroll detection
-│   ├── Hero.jsx         # Landing section with typing animation
-│   ├── About.jsx        # About me with stats and highlights
-│   ├── Projects.jsx     # Featured projects showcase
-│   ├── Skills.jsx       # Technical skills with progress bars
-│   ├── Resume.jsx       # Resume timeline and PDF viewer
-│   └── Contact.jsx      # Contact methods and social links
-├── App.jsx              # Main app with scroll tracking
-├── App.css              # Modern CSS with animations
-└── main.jsx             # Entry point
-```
+## 🌟 Portfolio Highlights
 
-## 🚀 Quick Setup
+This portfolio showcases a collection of carefully crafted projects that demonstrate technical proficiency and creative problem-solving:
 
-### 1. Install Dependencies
-```bash
-npm install
-```
+### 🛍️ **E-Commerce Platform**
+Full-stack e-commerce application featuring user authentication, payment processing with Stripe integration, and comprehensive admin dashboard. Built with React, Node.js, and MongoDB for scalable performance.
 
-### 2. Add Your Resume
-Place your resume PDF in the `public` folder as `resume.pdf`
+### 📋 **Task Management API**
+Robust RESTful API for task management with JWT authentication, real-time updates via Socket.io, and comprehensive documentation. Demonstrates backend expertise with PostgreSQL database integration.
 
-### 3. Customize Your Content
-Edit the components in `src/components/` to update:
-- **Hero.jsx**: Your name, title, and social links
-- **About.jsx**: Personal description and statistics
-- **Projects.jsx**: Your portfolio projects
-- **Skills.jsx**: Technical skills and certifications
-- **Resume.jsx**: Work experience and education
-- **Contact.jsx**: Contact information and location
+### 🌤️ **Weather Dashboard**
+Interactive weather application with location-based forecasts, interactive maps, and detailed analytics. Features responsive design using CSS Grid and TypeScript for type safety.
 
-### 4. Run Development Server
-```bash
-npm run dev
-```
+### 📊 **Social Media Analytics Dashboard**
+Comprehensive analytics platform for social media performance with data visualization using D3.js and automated reporting. Built with Vue.js frontend and Python FastAPI backend.
 
-Visit `http://localhost:5173` to see your portfolio!
+### 💬 **Real-time Chat Application**
+Modern chat application with instant messaging, file sharing capabilities, and user presence indicators. Utilizes Socket.io for real-time communication and Redis for session management.
 
-## 🎨 Customization Guide
+### 🤖 **Machine Learning Dashboard**
+Interactive dashboard for visualizing ML model performance with real-time predictions and analytics. Combines Python TensorFlow backend with React frontend for seamless data visualization.
 
-### Adding Your Information
+## ✨ Portfolio Features
 
-**Update Personal Details in Hero.jsx:**
-```javascript
-// Change your name and title
-<span className="name">Your Name</span>
+- **� Modern Design** - Clean, professional interface with smooth animations
+- **📱 Fully Responsive** - Optimized for all devices and screen sizes
+- **🎭 Interactive Elements** - Engaging hover effects and smooth transitions
+- **🔄 Auto-Sliding Projects** - Automatic slideshow with manual controls
+- **🌙 Dark/Light Theme** - Toggle between themes for optimal viewing
+- **📄 Resume Download** - Direct access to professional resume
+- **🎯 Smooth Navigation** - Seamless scrolling between sections
+- **⚡ Fast Performance** - Optimized loading and smooth animations
 
-// Update social links
-const socialLinks = [
-  { name: "GitHub", url: "https://github.com/yourusername", icon: "🔗" },
-  { name: "LinkedIn", url: "https://linkedin.com/in/yourprofile", icon: "💼" },
-  // ... add more
-]
-```
 
-**Add Your Projects in Projects.jsx:**
-```javascript
-{
-  id: 1,
-  title: "Your Amazing Project",
-  description: "Detailed project description",
-  technologies: ["React", "Node.js", "MongoDB"],
-  githubUrl: "https://github.com/yourusername/project",
-  liveUrl: "https://your-project.com",
-  images: ["project1.jpg"] // Optional: add to public folder
-}
-```
+## 🚀 Live Portfolio
 
-**Update Skills in Skills.jsx:**
-```javascript
-{
-  category: "Frontend",
-  icon: "🎨",
-  skills: ["React", "Vue.js", "Your Skills"]
-}
-```
+Visit the live portfolio to explore my work and get in touch:
+**[cbsdan.dev](https://cbsdan-portfolio.vercel.app)** 
 
-### Color Customization
-Edit CSS variables in `App.css`:
-```css
-:root {
-  --primary-color: #6366f1;    /* Main brand color */
-  --secondary-color: #06b6d4;  /* Accent color */
-  --accent-color: #f59e0b;     /* Highlight color */
-}
-```
+## 🛠️ Technologies & Tools
 
-## 📱 Sections Overview
+### Frontend
+- **React 19** - Modern component-based architecture
+- **CSS3** - Advanced styling with custom properties and animations
+- **JavaScript ES6+** - Modern JavaScript features and best practices
 
-1. **🏠 Hero** - Eye-catching landing with animated typing effect
-2. **👤 About** - Personal introduction with statistics and highlights  
-3. **💼 Projects** - Showcase of your best work with live demos
-4. **🛠️ Skills** - Technical skills with animated progress bars
-5. **📄 Resume** - Professional timeline and downloadable PDF
-6. **📞 Contact** - Multiple ways to get in touch
+### Development
+- **Vite** - Lightning-fast build tool and development server
+- **Git** - Version control and collaboration
+- **VS Code** - Primary development environment
 
-## 🚀 Deployment
+### Design & UX
+- **Responsive Design** - Mobile-first approach
+- **CSS Grid & Flexbox** - Modern layout techniques
+- **Smooth Animations** - Hardware-accelerated transitions
+- **Accessibility** - WCAG compliance considerations
 
-### Build for Production
-```bash
-npm run build
-```
+## 📞 Get in Touch
 
-### Deploy to Popular Platforms
+I'm always interested in discussing new opportunities, collaborations, or interesting projects.
 
-**Vercel (Recommended):**
-1. Connect your GitHub repository
-2. Deploy automatically on every push
+- **📧 Email**: [cabasadaniel1@gmail.com](mailto:cabasadaniel1@gmail.com)
+- **💼 LinkedIn**: [linkedin.com/in/daniel-cabasa-519b13376/](https://linkedin.com/in/daniel-cabasa-519b13376/)
+- **🔗 GitHub**: [github.com/cbsdan](https://github.com/cbsdan)
+- **📍 Location**: Taguig City, Philippines
 
-**Netlify:**
-1. Drag and drop the `dist` folder
-2. Or connect via GitHub for continuous deployment
+## 🎯 What I'm Looking For
 
-**GitHub Pages:**
-```bash
-npm install --save-dev gh-pages
-# Add to package.json scripts: "deploy": "gh-pages -d dist"
-npm run build && npm run deploy
-```
-
-## 🎯 Performance Features
-
-- **Lazy Loading** - Components load as needed
-- **Optimized Images** - Automatic image compression
-- **CSS Animations** - Hardware-accelerated transitions
-- **Minimal Bundle** - Only essential dependencies
-- **Fast Navigation** - Smooth scrolling between sections
-
-## 🔧 Technologies Used
-
-- **Frontend**: React 19, Modern CSS3
-- **Build Tool**: Vite (super fast HMR)
-- **Styling**: Pure CSS with CSS Variables
-- **Icons**: Emoji (lightweight and universal)
-- **Animations**: CSS3 transitions and keyframes
-- **Typography**: Inter font family
-
-## 📊 Browser Support
-
-- ✅ Chrome (latest)
-- ✅ Firefox (latest)
-- ✅ Safari (latest)
-- ✅ Edge (latest)
-- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
-
-## 📞 Contact Features
-
-The portfolio includes multiple contact methods:
-- **📧 Direct Email** - Opens default email client
-- **💼 LinkedIn** - Professional networking
-- **🔗 GitHub** - Code repository access
-- **🐦 Social Media** - Twitter and other platforms
-- **📍 Location** - Your city/country
-- **⏰ Response Time** - Set expectations
-
-## 🎨 Design Philosophy
-
-- **Minimalist** - Clean, uncluttered interface
-- **Professional** - Business-appropriate aesthetic
-- **Modern** - Contemporary design trends
-- **Accessible** - WCAG compliance considerations
-- **Fast** - Optimized for quick loading
-
-## 📝 License
-
-MIT License - Feel free to use this template for your own portfolio!
+- **Full-Stack Development Roles** - Building end-to-end solutions
+- **Frontend Specialization** - Creating exceptional user experiences  
+- **Backend Development** - Designing robust APIs and systems
+- **Remote Opportunities** - Collaborating with global teams
+- **Innovative Projects** - Working with cutting-edge technologies
 
 ---
 
-**Ready to showcase your skills?** 🚀 
-Customize this template and deploy your professional portfolio today!
+## Resume
+
+My complete professional resume is available for download directly from the portfolio, featuring:
+- **Technical Skills** - Comprehensive list of technologies and tools
+- **Education & Certifications** - Academic background and professional development
+- **Contact Information** - Multiple ways to connect
+
+---
+
+**Let's build something amazing together!** 🚀
+

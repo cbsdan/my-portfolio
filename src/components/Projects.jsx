@@ -59,9 +59,13 @@ const Projects = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isScrollLocked, setIsScrollLocked] = useState(false)
   const [showAllProjects, setShowAllProjects] = useState(false)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [isManualNavigation, setIsManualNavigation] = useState(false)
   const slideshowRef = useRef(null)
   const startX = useRef(0)
   const startY = useRef(0)
+  const autoPlayRef = useRef(null)
+  const manualTimeoutRef = useRef(null)
   
   const projects = [
     {
@@ -122,6 +126,72 @@ const Projects = () => {
 
   const featuredProjects = showAllProjects ? projects : projects.slice(0, 5) // Show 5 initially, all when expanded
 
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlaying || isManualNavigation) return
+
+    const startAutoPlay = () => {
+      // Clear any existing interval
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current)
+      }
+      
+      autoPlayRef.current = setInterval(() => {
+        // Don't auto-advance if manual navigation is active
+        if (isManualNavigation || isScrollLocked) return
+        
+        setCurrentSlide(prev => {
+          const nextSlide = prev + 1
+          // Loop back to first slide when reaching the end
+          return nextSlide >= featuredProjects.length ? 0 : nextSlide
+        })
+      }, 3000) // 3 seconds interval
+    }
+
+    const stopAutoPlay = () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current)
+        autoPlayRef.current = null
+      }
+    }
+
+    // Start auto-play
+    startAutoPlay()
+
+    // Pause auto-play when user hovers over slideshow
+    const slideshowElement = slideshowRef.current
+    if (slideshowElement) {
+      slideshowElement.addEventListener('mouseenter', stopAutoPlay)
+      slideshowElement.addEventListener('mouseleave', startAutoPlay)
+      slideshowElement.addEventListener('touchstart', stopAutoPlay)
+    }
+
+    // Cleanup
+    return () => {
+      stopAutoPlay()
+      if (slideshowElement) {
+        slideshowElement.removeEventListener('mouseenter', stopAutoPlay)
+        slideshowElement.removeEventListener('mouseleave', startAutoPlay)
+        slideshowElement.removeEventListener('touchstart', stopAutoPlay)
+      }
+    }
+  }, [isAutoPlaying, isManualNavigation, featuredProjects.length, isScrollLocked])
+
+  // Helper function to handle manual navigation
+  const handleManualNavigation = () => {
+    setIsManualNavigation(true)
+    
+    // Clear any existing manual timeout
+    if (manualTimeoutRef.current) {
+      clearTimeout(manualTimeoutRef.current)
+    }
+    
+    // Resume auto-play after 5 seconds of no manual interaction
+    manualTimeoutRef.current = setTimeout(() => {
+      setIsManualNavigation(false)
+    }, 5000)
+  }
+
   // Reset current slide when toggling show all projects
   const handleShowAllToggle = () => {
     setShowAllProjects(!showAllProjects)
@@ -133,12 +203,14 @@ const Projects = () => {
     if (currentSlide < featuredProjects.length - 1) {
       setCurrentSlide(curr => curr + 1)
     }
+    handleManualNavigation()
   }
 
   const goToPrevSlide = () => {
     if (currentSlide > 0) {
       setCurrentSlide(curr => curr - 1)
     }
+    handleManualNavigation()
   }
 
   // Handle wheel event for scroll-based navigation (desktop only)
@@ -185,11 +257,13 @@ const Projects = () => {
               // Scroll down - go to next
               setCurrentSlide(curr => curr + 1)
               setIsScrollLocked(true)
+              handleManualNavigation()
               setTimeout(() => setIsScrollLocked(false), 700)
             } else if (deltaY < 0 && currentSlide > 0) {
               // Scroll up - go to previous
               setCurrentSlide(curr => curr - 1)
               setIsScrollLocked(true)
+              handleManualNavigation()
               setTimeout(() => setIsScrollLocked(false), 700)
             }
           }
@@ -261,14 +335,16 @@ const Projects = () => {
             // Swipe left - go to next
             setCurrentSlide(prev => prev + 1)
             setIsScrollLocked(true)
-            setTimeout(() => setIsScrollLocked(false), 700) // Match scroll transition duration
+            handleManualNavigation()
+            setTimeout(() => setIsScrollLocked(false), 700)
             startX.current = 0
             startY.current = 0
           } else if (diffX < 0 && currentSlide > 0) {
             // Swipe right - go to previous
             setCurrentSlide(prev => prev - 1)
             setIsScrollLocked(true)
-            setTimeout(() => setIsScrollLocked(false), 700) // Match scroll transition duration
+            handleManualNavigation()
+            setTimeout(() => setIsScrollLocked(false), 700)
             startX.current = 0
             startY.current = 0
           }
@@ -291,6 +367,18 @@ const Projects = () => {
       document.removeEventListener('touchend', handleTouchEnd)
     }
   }, [currentSlide, featuredProjects.length, isScrollLocked])
+
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current)
+      }
+      if (manualTimeoutRef.current) {
+        clearTimeout(manualTimeoutRef.current)
+      }
+    }
+  }, [])
 
   return (
     <section id="projects" className="projects-section">
@@ -399,7 +487,10 @@ const Projects = () => {
               <button
                 key={index}
                 className={`indicator ${index === currentSlide ? 'active' : ''}`}
-                onClick={() => setCurrentSlide(index)}
+                onClick={() => {
+                  setCurrentSlide(index)
+                  handleManualNavigation()
+                }}
               />
             ))}
           </div>
