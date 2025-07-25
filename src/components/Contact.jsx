@@ -1,7 +1,7 @@
 const Contact = () => {
   const contactMethods = [
     {
-      icon: "📧",
+      icon: "fa-solid fa-envelope",
       title: "Email",
       subtitle: "cabasadaniel1@gmail.com",
       description: "Send me an email anytime!",
@@ -9,7 +9,7 @@ const Contact = () => {
       link: "mailto:cabasadaniel1@gmail.com"
     },
     {
-      icon: "💼", 
+      icon: "fa-brands fa-linkedin", 
       title: "LinkedIn",
       subtitle: "Connect with me",
       description: "Let's grow our network",
@@ -17,7 +17,7 @@ const Contact = () => {
       link: "https://linkedin.com/in/daniel-cabasa-519b13376"
     },
     {
-      icon: "🔗",
+      icon: "fa-brands fa-github",
       title: "GitHub", 
       subtitle: "Check out my code",
       description: "Explore my repositories",
@@ -25,7 +25,7 @@ const Contact = () => {
       link: "https://github.com/cbsdan"
     },
     {
-      icon: "👍",
+      icon: "fa-brands fa-facebook",
       title: "Facebook",
       subtitle: "Follow my journey", 
       description: "Tech insights and updates",
@@ -83,7 +83,7 @@ const Contact = () => {
                   href="mailto:cabasadaniel1@gmail.com" 
                   className="btn btn-primary btn-large send-me-email"
                 >
-                  <span>📧</span> Send me an email
+                  <span><i className="fa-solid fa-envelope"></i></span> Send me an email
                 </a>
               </div>
             </div>
@@ -100,7 +100,7 @@ const Contact = () => {
                   className="contact-method"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="method-icon">{method.icon}</div>
+                  <div className="method-icon"><i className={method.icon}></i></div>
                   <div className="method-content">
                     <h4>{method.title}</h4>
                     <p className="method-subtitle">{method.subtitle}</p>

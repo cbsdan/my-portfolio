@@ -14,7 +14,7 @@
   --text-secondary: #6b7280;
   --text-light: #9ca3af;
   --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
+  --bg-secondary: #f7f3f3;
   --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --brand-bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -557,6 +557,9 @@ body {
   animation: fadeInLeft 0.8s ease-out forwards;
 }
 
+.social-link i {
+  font-size: 1.5rem;
+}
 .social-link:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: translateX(10px);
@@ -581,7 +584,7 @@ body {
 
 /* ===== SECTION STYLES ===== */
 section {
-  padding: 6rem 0 0;
+  padding: 4rem 0 0;
   position: relative;
 }
 
@@ -594,7 +597,7 @@ section {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  background: var(--bg-gradient);
+  background: var(--brand-bg-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -800,14 +803,15 @@ section {
 .image-placeholder {
   background: var(--bg-secondary);
   border-radius: var(--border-radius);
-  padding: 3rem;
+  padding: 1rem;
   text-align: center;
   color: var(--text-light);
   border: 2px dashed var(--text-light);
+  max-width: 35rem;
 }
 
-.image-placeholder span {
-  font-size: 4rem;
+.image-placeholder img {
+  width: 100%;
   display: block;
   margin-bottom: 1rem;
 }
@@ -818,6 +822,9 @@ section {
   padding-bottom: 2rem;
 }
 
+.projects-section .section-header {
+  margin-bottom: 0;
+}
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1136,29 +1143,6 @@ section {
   overflow: hidden;
 }
 
-.progress-bar {
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    var(--primary-color),
-    var(--secondary-color)
-  );
-  border-radius: 2px;
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-}
-
-.progress-bar::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 10px;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
-  animation: shimmer 2s infinite;
-}
-
 @keyframes shimmer {
   0% {
     transform: translateX(-10px);
@@ -1446,6 +1430,7 @@ section {
 /* ===== SKILLS SECTION ===== */
 .skills-section {
   padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .skills-content {
@@ -1824,7 +1809,6 @@ section {
 }
 
 .contact-cta {
-  background: var(--bg-secondary);
   padding: 1rem 0;
   border-radius: var(--border-radius);
   text-align: center;
@@ -1845,6 +1829,12 @@ section {
   padding: 1.5rem !important;
   border-top-left-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.send-me-email span {
+  font-size: 1.2rem;
 }
 .methods-grid {
   display: grid;
@@ -1945,6 +1935,9 @@ section {
     justify-content: center;
     margin-bottom: 1rem;
   }
+  .hero-image {
+    opacity: 0.8;
+  }
 }
 /* Medium screens (tablets and large phones) */
 @media (max-width: 1024px) and (min-width: 769px) {
@@ -1962,7 +1955,6 @@ section {
     right: 0;
     bottom: 0;
     z-index: 1;
-    opacity: 0.2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2018,7 +2010,7 @@ section {
 
   .navbar {
     padding: 0.5rem 1rem;
-    min-height: 60px;
+    min-height: 72px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -2044,6 +2036,7 @@ section {
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    min-height: 40px;
     padding: 0;
     align-items: center;
     justify-content: center;
@@ -2155,10 +2148,10 @@ section {
     right: 0;
     bottom: 0;
     z-index: 1;
-    opacity: 0.15;
     display: flex;
     justify-content: center;
     align-items: center;
+   
   }
   
   .hero-text {
@@ -2233,15 +2226,9 @@ section {
     font-size: 1rem;
     margin-bottom: 2rem;
   }
-
-  /* Smaller Hero Image for very small screens */
-  .hero-image {
-    opacity: 0.1;
-  }
   
   .hero-text {
     padding: 1.5rem;
-    background: rgba(0, 0, 0, 0.4);
   }
   
   .profile-card {
@@ -2290,6 +2277,11 @@ section {
     padding: 0.75rem 1.5rem;
     font-size: 0.9rem;
   }
+
+  .btn-resume, .btn-contact {
+    text-align: center;
+    justify-content: center;
+  }
 }
 
 /* Mobile landscape orientation */
@@ -2301,13 +2293,11 @@ section {
   }
   
   .hero-image {
-    opacity: 0.12;
     position: absolute;
   }
   
   .hero-text {
     padding: 1rem 2rem;
-    background: rgba(0, 0, 0, 0.35);
   }
   
   .profile-card {

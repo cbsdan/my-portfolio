@@ -20,10 +20,10 @@ const Hero = () => {
   }, [])
 
   const socialLinks = [
-    { name: "GitHub", url: "https://github.com/cbsdan", icon: "🔗" },
-    { name: "LinkedIn", url: "https://linkedin.com/in/daniel-cabasa-519b13376", icon: "💼" },
-    { name: "Facebook", url: "https://facebook.com/daniel.cabasa.14", icon: "👍" },
-    { name: "Email", url: "mailto:cabasadaniel1@gmail.com", icon: "📧" }
+    { name: "GitHub", url: "https://github.com/cbsdan", icon: "fa-brands fa-github" },
+    { name: "LinkedIn", url: "https://linkedin.com/in/daniel-cabasa-519b13376", icon: "fa-brands fa-linkedin" },
+    { name: "Facebook", url: "https://facebook.com/daniel.cabasa.14", icon: "fa-brands fa-facebook" },
+    { name: "Email", url: "mailto:cabasadaniel1@gmail.com", icon: "fa-solid fa-envelope" }
   ]
 
   const downloadResume = () => {
@@ -65,13 +65,13 @@ const Hero = () => {
               onClick={downloadResume}
               title="Download my resume"
             >
-              ⤓ &nbsp; Download Resume
+              <i class="fa-solid fa-download"></i> &nbsp; Download Resume
             </button>
             <button
-              className="btn btn-secondary"
+              className="btn btn-secondary btn-contact"
               onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
             >
-              ☎ &nbsp; Get In Touch
+              <i class="fa-solid fa-phone"></i> &nbsp; Get In Touch
             </button>
 
           </div>
@@ -104,7 +104,7 @@ const Hero = () => {
             className="social-link"
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            <span className="social-icon">{link.icon}</span>
+            <span className="social-icon"><i className={link.icon}></i></span>
             <span className="social-label">{link.name}</span>
           </a>
         ))}

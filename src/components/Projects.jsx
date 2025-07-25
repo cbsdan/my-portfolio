@@ -145,7 +145,7 @@ const Projects = () => {
           // Loop back to first slide when reaching the end
           return nextSlide >= featuredProjects.length ? 0 : nextSlide
         })
-      }, 3000) // 3 seconds interval
+      }, 5000) // 5 seconds interval
     }
 
     const stopAutoPlay = () => {
@@ -435,13 +435,13 @@ const Projects = () => {
                 } else if (position === 1) {
                   // Next card (right stack) - show more of the card
                   className += ' next'
-                  transform = 'translateX(120px) translateY(20px) scale(0.95)'
+                  transform = 'translateX(150px) translateY(20px) scale(0.95)'
                   opacity = 0.8
                   zIndex = 90
                 } else if (position === -1) {
                   // Previous card (left stack) - show more of the card
                   className += ' prev'
-                  transform = 'translateX(-120px) translateY(20px) scale(0.95)'
+                  transform = 'translateX(-150px) translateY(20px) scale(0.95)'
                   opacity = 0.8
                   zIndex = 90
                 } else if (position > 1) {
@@ -494,16 +494,6 @@ const Projects = () => {
               />
             ))}
           </div>
-          
-          {/* Progress Bar */}
-          <div className="slide-progress">
-            <div 
-              className="progress-bar"
-              style={{ 
-                width: `${((currentSlide + 1) / featuredProjects.length) * 100}%`
-              }}
-            />
-          </div>
 
           {/* Show All Projects Toggle */}
           <div className="projects-toggle">
@@ -513,9 +503,6 @@ const Projects = () => {
             >
               {showAllProjects ? 'Show Less Projects' : `Show All ${projects.length} Projects`}
             </button>
-            <p className="projects-count">
-              Showing {featuredProjects.length} of {projects.length} projects
-            </p>
           </div>
 
         </div>

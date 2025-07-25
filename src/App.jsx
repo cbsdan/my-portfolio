@@ -69,7 +69,7 @@ function App() {
           onClick={scrollToTop}
           aria-label="Scroll to top"
         >
-          ↑
+          <i class="fa-solid fa-up-long"></i>
         </button>
       </div>
     </ThemeProvider>

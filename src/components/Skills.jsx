@@ -28,29 +28,28 @@ const Skills = () => {
     {
       category: "Frontend",
       icon: "🎨",
-      skills: ["React", "Vue.js", "TypeScript", "HTML/CSS", "Tailwind CSS", "Next.js"]
+      skills: ["React", "HTML/CSS", "JavaScript", "Bootstrap"]
     },
     {
       category: "Backend", 
       icon: "⚙️",
-      skills: ["Node.js", "Python", "Express.js", "RESTful APIs", "GraphQL", "Django"]
+      skills: ["Node.js", "Python", "Express.js", "Motoko"]
     },
     {
       category: "Database",
       icon: "🗄️", 
-      skills: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Firebase", "Supabase"]
+      skills: ["MongoDB", "MySQL", "Firebase"]
     },
     {
       category: "Tools & Cloud",
       icon: "☁️",
-      skills: ["Git", "Docker", "AWS", "Vercel", "Postman", "Figma"]
+      skills: ["Git", "Google Cloud", "Vercel", "Postman", "Figma"]
     }
   ]
 
   const certifications = [
-    { name: "AWS Cloud Practitioner", issuer: "Amazon", year: "2024" },
-    { name: "React Developer", issuer: "Meta", year: "2023" },
-    { name: "Full Stack Development", issuer: "freeCodeCamp", year: "2023" }
+    { name: "iThink Hackathon PBW 2025", issuer: "ICP PH", year: "2025" },
+    { name: "Web Design Certification", issuer: "freecodecamp", year: "2022" },
   ]
 
   return (
@@ -93,10 +92,6 @@ const Skills = () => {
             <div className="learning">
               <h3>Currently Learning</h3>
               <div className="learning-items">
-                <div className="learning-item">
-                  <span className="learning-icon">📱</span>
-                  <span>React Native</span>
-                </div>
                 <div className="learning-item">
                   <span className="learning-icon">🤖</span>
                   <span>Machine Learning</span>
