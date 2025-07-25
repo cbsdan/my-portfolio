@@ -29,8 +29,11 @@ const Navbar = ({ activeSection, setActiveSection }) => {
     setActiveSection(sectionId)
   }
 
+  // Show theme toggle when scrolled down (not at top) or when not on hero section
+  const showThemeToggle = isScrolled || activeSection !== 'hero'
+
   return (
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${isScrolled ? 'scrolled' : ''} ${activeSection === 'hero' ? 'on-hero' : ''}`}>
       <div className="nav-brand">
         <span className="brand-image">
           <img src="/favicon.png" alt="Logo" className="logo" />
@@ -48,9 +51,11 @@ const Navbar = ({ activeSection, setActiveSection }) => {
             {item.label}
           </button>
         ))}
-        <button className="theme-toggle" onClick={toggleTheme} title={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}>
-          {isDarkMode ? '☀️' : '🌙'}
-        </button>
+        {showThemeToggle && (
+          <button className="theme-toggle" onClick={toggleTheme} title={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}>
+            {isDarkMode ? '☀️' : '🌙'}
+          </button>
+        )}
       </div>
     </nav>
   )

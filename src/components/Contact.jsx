@@ -81,7 +81,7 @@ const Contact = () => {
               <div className="cta-buttons">
                 <a 
                   href="mailto:cabasadaniel1@gmail.com" 
-                  className="btn btn-primary btn-large"
+                  className="btn btn-primary btn-large send-me-email"
                 >
                   <span>📧</span> Send me an email
                 </a>

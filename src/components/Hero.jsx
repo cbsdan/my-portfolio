@@ -4,7 +4,7 @@ import resumePdf from '../assets/cbsdan-resume.pdf'
 const Hero = () => {
   const [displayText, setDisplayText] = useState('')
   const fullText = 'Full Stack Developer'
-  
+
   useEffect(() => {
     let index = 0
     const timer = setInterval(() => {
@@ -15,7 +15,7 @@ const Hero = () => {
         clearInterval(timer)
       }
     }, 100)
-    
+
     return () => clearInterval(timer)
   }, [])
 
@@ -45,7 +45,7 @@ const Hero = () => {
           <div className="shape shape-4"></div>
         </div>
       </div>
-      
+
       <div className="hero-content">
         <div className="hero-text">
           <h1 className="hero-title">
@@ -53,35 +53,30 @@ const Hero = () => {
             <span className="name">Daniel Cabasa</span>
             <span className="role">{displayText}<span className="cursor">|</span></span>
           </h1>
-          
+
           <p className="hero-description">
             I create beautiful, functional, and user-centered digital experiences.
             Passionate about building scalable web applications with modern technologies.
           </p>
-          
+
           <div className="hero-buttons">
-            <button 
-              className="btn btn-primary"
-              onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
-            >
-              View My Work
-            </button>
-            <button 
-              className="btn btn-secondary"
-              onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
-            >
-              Get In Touch
-            </button>
-            <button 
+            <button
               className="btn btn-resume"
               onClick={downloadResume}
               title="Download my resume"
             >
-              📄 Download Resume
+              ⤓ &nbsp; Download Resume
             </button>
+            <button
+              className="btn btn-secondary"
+              onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+            >
+              ☎ &nbsp; Get In Touch
+            </button>
+
           </div>
         </div>
-        
+
         <div className="hero-image">
           <div className="profile-card">
             <div className="profile-avatar">
@@ -98,14 +93,14 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="social-links">
         {socialLinks.map((link, index) => (
-          <a 
-            key={index} 
-            href={link.url} 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            key={index}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
             className="social-link"
             style={{ animationDelay: `${index * 0.1}s` }}
           >
@@ -114,7 +109,7 @@ const Hero = () => {
           </a>
         ))}
       </div>
-    
+
     </section>
   )
 }
