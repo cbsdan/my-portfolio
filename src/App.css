@@ -596,7 +596,6 @@ section {
 .section-title {
   font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 1rem;
   background: var(--brand-bg-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -827,7 +826,7 @@ section {
 }
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   gap: 2rem;
   margin-bottom: 3rem;
 }
@@ -848,10 +847,70 @@ section {
 }
 
 .project-image {
-  height: 200px;
+  height: 300px;
   background: var(--bg-secondary);
   position: relative;
   overflow: hidden;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+/* Image container for projects with images */
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.project-preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-preview-image {
+  transform: scale(1.05);
+}
+
+/* Image overlay */
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg, 
+    rgba(99, 102, 241, 0.9) 0%, 
+    rgba(168, 85, 247, 0.9) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .image-overlay {
+  opacity: 1;
+}
+
+.overlay-content {
+  text-align: center;
+  color: white;
+}
+
+.overlay-content h4 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.overlay-content p {
+  font-size: 0.9rem;
+  opacity: 0.9;
 }
 
 .placeholder-image {
@@ -861,102 +920,196 @@ section {
   justify-content: center;
   height: 100%;
   color: var(--text-light);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
 }
 
 .project-icon {
-  font-size: 3rem;
+  font-size: 4rem;
   margin-bottom: 1rem;
+  opacity: 0.6;
 }
 
 .project-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: var(--transition);
-}
-
-.project-card:hover .project-overlay {
-  opacity: 1;
+  text-align: center;
 }
 
 .project-overlay h4 {
-  color: white;
-  font-size: 1.2rem;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 .project-content {
   padding: 2rem;
+  /* display: flex;
+  flex-direction: column;
+  height: calc(100% - 280px); */
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
 }
 
 .project-title {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin: 0;
   color: var(--text-primary);
+  line-height: 1.3;
+  flex: 1;
+  /* Single line with ellipsis */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-status {
+  flex-shrink: 0;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.live {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.status-badge.development {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
 }
 
 .project-description {
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
   line-height: 1.6;
+  flex: 1;
+  font-size: 0.95rem;
+  /* Limit to 3 lines with ellipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .project-tech {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.5rem;
   margin-bottom: 2rem;
+  /* Single line scrollable without visible scrollbar */
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.project-tech::-webkit-scrollbar {
+  display: none;
 }
 
 .tech-tag {
-  background: linear-gradient(
-    135deg,
-    var(--primary-color),
-    var(--primary-dark)
-  );
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
-  padding: 0.25rem 0.75rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 500;
+  transition: transform 0.2s ease;
+  /* Prevent shrinking in horizontal layout */
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.tech-tag:hover {
+  transform: translateY(-2px);
 }
 
 .project-links {
   display: flex;
   gap: 1rem;
+  margin-top: auto;
 }
 
 .project-link {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.25rem;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 500;
-  transition: var(--transition);
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  flex: 1;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.project-link:hover::before {
+  left: 100%;
 }
 
 .project-link.github {
-  background: var(--text-primary);
-  color: var(--bg-primary);
-}
-
-.project-link.live {
-  background: var(--secondary-color);
+  background: linear-gradient(135deg, #24292e, #1a1e22);
   color: white;
 }
 
-.project-link:hover {
+.project-link.github:hover {
+  background: linear-gradient(135deg, #1a1e22, #0d1117);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 8px 25px rgba(36, 41, 46, 0.3);
+}
+
+.project-link.live {
+  background: linear-gradient(135deg, var(--secondary-color), #0891b2);
+  color: white;
+}
+
+.project-link.live:hover {
+  background: linear-gradient(135deg, #0891b2, #0e7490);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.3);
+}
+
+.link-icon {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.project-link:hover .link-icon {
+  transform: scale(1.1);
+}
+
+.link-text {
+  font-weight: 600;
 }
 
 .projects-footer {
@@ -973,7 +1126,7 @@ section {
 .projects-slideshow {
   margin: 0;
   position: relative;
-  min-height: 90vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1025,6 +1178,8 @@ section {
   background: var(--bg-primary);
   overflow: hidden;
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .stacked-card.current .project-card {
@@ -1081,6 +1236,24 @@ section {
     rgba(255, 255, 255, 0.05) 0%,
     rgba(0, 0, 0, 0.1) 100%
   );
+}
+
+/* Dark theme image overlay */
+[data-theme="dark"] .image-overlay {
+  background: linear-gradient(
+    135deg, 
+    rgba(129, 140, 248, 0.9) 0%, 
+    rgba(168, 85, 247, 0.9) 100%
+  );
+}
+
+/* Dark theme status badges */
+[data-theme="dark"] .status-badge.live {
+  background: linear-gradient(135deg, #059669, #047857);
+}
+
+[data-theme="dark"] .status-badge.development {
+  background: linear-gradient(135deg, #d97706, #b45309);
 }
 
 /* Remove old slideshow styles */
@@ -1349,7 +1522,7 @@ section {
 /* Responsive Design for Stacked Cards */
 @media (max-width: 768px) {
   .projects-slideshow {
-    min-height: 90vh;
+    min-height: 80vh;
   }
 
   .slideshow-container {
@@ -1360,7 +1533,7 @@ section {
 
   .stacked-card {
     max-width: 90%;
-    height: 500px; /* Increased height to show full content */
+    height: 550px; /* Increased height for new design */
   }
 
   .stacked-card .project-card {
@@ -1368,8 +1541,31 @@ section {
     overflow-y: auto; /* Allow scrolling within card if needed */
   }
 
+  .stacked-card .project-image {
+    height: 220px; /* Smaller image height on mobile */
+  }
+
   .stacked-card .project-content {
     padding: 1.5rem; /* Adjust padding for mobile */
+    height: calc(100% - 220px);
+  }
+
+  .stacked-card .project-title {
+    font-size: 1.2rem;
+    /* Maintain single line with ellipsis on mobile */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .stacked-card .project-links {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .stacked-card .project-link {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
   }
 
   .stacked-card.prev {
@@ -1386,37 +1582,52 @@ section {
   }
 
   .stacked-card {
-    height: 480px; /* Adjusted height for very small screens */
+    height: 500px; /* Adjusted height for very small screens */
     max-width: 85%;
+  }
+
+  .stacked-card .project-image {
+    height: 180px; /* Even smaller image height on very small screens */
   }
 
   .stacked-card .project-content {
     padding: 1.25rem; /* Smaller padding for very small screens */
+    height: calc(100% - 180px);
   }
 
   .stacked-card .project-title {
-    font-size: 1.3rem; /* Slightly smaller title */
-    margin-bottom: 0.75rem;
+    font-size: 1.1rem; /* Slightly smaller title */
+    /* Maintain single line with ellipsis on small mobile */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .stacked-card .project-description {
     font-size: 0.9rem; /* Smaller description text */
     line-height: 1.5;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
+    /* Maintain 3-line limit with ellipsis on small mobile */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .stacked-card .tech-tag {
     font-size: 0.75rem; /* Smaller tech tags */
-    padding: 0.2rem 0.6rem;
+    padding: 0.3rem 0.6rem;
   }
 
   .stacked-card .project-links {
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   .stacked-card .project-link {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
   }
 
   .stacked-card.prev {
@@ -1595,104 +1806,6 @@ section {
 
 .learning-icon {
   font-size: 1.5rem;
-}
-
-/* ===== RESUME SECTION ===== */
-.resume-section {
-  background: var(--bg-secondary);
-}
-
-.resume-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-}
-
-.resume-timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-.timeline-section {
-  position: relative;
-}
-
-.timeline-title {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  font-size: 1.5rem;
-  color: var(--text-primary);
-}
-
-.timeline-icon {
-  font-size: 2rem;
-}
-
-.timeline-item {
-  position: relative;
-  padding-left: 3rem;
-  margin-bottom: 2rem;
-}
-
-.timeline-item::before {
-  content: "";
-  position: absolute;
-  left: 1rem;
-  top: 0;
-  bottom: -2rem;
-  width: 2px;
-  background: var(--primary-color);
-}
-
-.timeline-item:last-child::before {
-  display: none;
-}
-
-.timeline-dot {
-  position: absolute;
-  left: 0.5rem;
-  top: 0.5rem;
-  width: 1rem;
-  height: 1rem;
-  background: var(--primary-color);
-  border-radius: 50%;
-  border: 3px solid var(--bg-secondary);
-}
-
-.timeline-content {
-  background: var(--bg-primary);
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-sm);
-}
-
-.timeline-content h4 {
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
-}
-
-.timeline-content h5 {
-  color: var(--primary-color);
-  margin-bottom: 0.5rem;
-}
-
-.timeline-period {
-  display: inline-block;
-  background: var(--bg-secondary);
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
-}
-
-.timeline-content p {
-  color: var(--text-secondary);
-  line-height: 1.6;
 }
 
 .resume-download {
@@ -2110,7 +2223,7 @@ section {
   }
 
   .section-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 
   .projects-grid {
@@ -2337,7 +2450,7 @@ section {
 }
 
 .section-title {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 .btn {

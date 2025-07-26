@@ -17,23 +17,23 @@ I'm a dedicated software developer with expertise in modern web technologies, cr
 
 This portfolio showcases a collection of carefully crafted projects that demonstrate technical proficiency and creative problem-solving:
 
-### 🛍️ **E-Commerce Platform**
-Full-stack e-commerce application featuring user authentication, payment processing with Stripe integration, and comprehensive admin dashboard. Built with React, Node.js, and MongoDB for scalable performance.
+### **Acadena: A Decentralized Academic Records System**
+Acadena is a decentralized platform that utilizes blockchain technology for managing academic records—secure, verifiable, and accessible for both students and institutions. Built with React and Motoko on the Internet Computer blockchain, featuring Internet Identity authentication for seamless and secure user access.
 
-### 📋 **Task Management API**
-Robust RESTful API for task management with JWT authentication, real-time updates via Socket.io, and comprehensive documentation. Demonstrates backend expertise with PostgreSQL database integration.
+**Technologies**: React, Motoko, Internet Identity, Blockchain
+**Live Demo**: [acadena.icp0.io](https://tcm44-raaaa-aaaab-qbzya-cai.icp0.io)
 
-### 🌤️ **Weather Dashboard**
-Interactive weather application with location-based forecasts, interactive maps, and detailed analytics. Features responsive design using CSS Grid and TypeScript for type safety.
+### **Spherify: Team Collaboration Platform for Software Developers**
+Integrating common tools such as Chats, Video Conferencing, File Sharing, and Task Management into a single platform that aims to solve the problem of Tool Fragmentation causing inefficiencies in workflows among software developers. A comprehensive MERN stack application with real-time communication capabilities.
 
-### 📊 **Social Media Analytics Dashboard**
-Comprehensive analytics platform for social media performance with data visualization using D3.js and automated reporting. Built with Vue.js frontend and Python FastAPI backend.
+**Technologies**: MERN Stack, Socket.io, Firebase, Google Cloud
+**Live Demo**: [spherify.vercel.app](https://spherify.vercel.app/)
 
-### 💬 **Real-time Chat Application**
-Modern chat application with instant messaging, file sharing capabilities, and user presence indicators. Utilizes Socket.io for real-time communication and Redis for session management.
+### **Intrusion Detection System**
+A machine learning and deep learning-based IDS that uses LSTM and KNN algorithms to classify network attacks using the NSL-KDD dataset. Users input potential intrusion parameters and receive real-time attack classification and alerts. The system aims to enhance cybersecurity by detecting anomalies and informing users to mitigate threats proactively.
 
-### 🤖 **Machine Learning Dashboard**
-Interactive dashboard for visualizing ML model performance with real-time predictions and analytics. Combines Python TensorFlow backend with React frontend for seamless data visualization.
+**Technologies**: Python, TensorFlow, Machine Learning, React
+**Status**: Development (Code Available)
 
 ## ✨ Portfolio Features
 

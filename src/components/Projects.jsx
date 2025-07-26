@@ -5,9 +5,17 @@ const ProjectCard = ({ project, index, isActive }) => (
     <div className="project-image">
       {project.images.length > 0 ? (
         <div className="image-gallery">
-          {project.images.map((img, idx) => (
-            <img key={idx} src={img} alt={`${project.title} screenshot ${idx + 1}`} />
-          ))}
+          <img
+            src={project.images[0]}
+            alt={`${project.title} preview`}
+            className="project-preview-image"
+          />
+          <div className="image-overlay">
+            <div className="overlay-content">
+              <h4>View Project</h4>
+              <p>Click to explore</p>
+            </div>
+          </div>
         </div>
       ) : (
         <div className="placeholder-image">
@@ -20,34 +28,46 @@ const ProjectCard = ({ project, index, isActive }) => (
         </div>
       )}
     </div>
-    
+
     <div className="project-content">
-      <h3 className="project-title">{project.title}</h3>
+      <div className="project-header">
+        <h3 className="project-title" title={`${project.title}`}>{project.title}</h3>
+        <div className="project-status">
+          {project.liveUrl ? (
+            <span className="status-badge live">Live</span>
+          ) : (
+            <span className="status-badge development">Code only</span>
+          )}
+        </div>
+      </div>
+
       <p className="project-description">{project.description}</p>
-      
+
       <div className="project-tech">
         {project.technologies.map((tech, idx) => (
           <span key={idx} className="tech-tag">{tech}</span>
         ))}
       </div>
-      
+
       <div className="project-links">
-        <a 
-          href={project.githubUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
+        <a
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className="project-link github"
         >
-          <span>📂</span> Code
+          <span className="link-icon">📂</span>
+          <span className="link-text">Code</span>
         </a>
         {project.liveUrl && (
-          <a 
-            href={project.liveUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="project-link live"
           >
-            <span>🚀</span> Live Demo
+            <span className="link-icon">🚀</span>
+            <span className="link-text">Live Demo</span>
           </a>
         )}
       </div>
@@ -66,61 +86,34 @@ const Projects = () => {
   const startY = useRef(0)
   const autoPlayRef = useRef(null)
   const manualTimeoutRef = useRef(null)
-  
+
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce application with React, Node.js, and MongoDB. Features include user authentication, payment processing, and admin dashboard.",
-      technologies: ["React", "Node.js", "MongoDB", "Express", "Stripe"],
-      githubUrl: "https://github.com/yourusername/ecommerce-platform",
-      liveUrl: "https://your-ecommerce-demo.com",
-      images: []
+      title: "Acadena: A Decentralized Academic Records System",
+      description: "Acadena is a decentralized platform that utilize blockchain for managing academic records—secure, verifiable, and accessible for both students and institutions.",
+      technologies: ["React", "Motoko", "Internet Identity", "Blockchain"],
+      githubUrl: "https://github.com/cbsdan/Acadena",
+      liveUrl: "https://tcm44-raaaa-aaaab-qbzya-cai.icp0.io",
+      images: ["/project-images/Acadena-2.png"]
     },
     {
       id: 2,
-      title: "Task Management API",
-      description: "RESTful API for task management with authentication, real-time updates, and comprehensive documentation.",
-      technologies: ["Node.js", "PostgreSQL", "JWT", "Socket.io"],
-      githubUrl: "https://github.com/yourusername/task-management-api",
-      liveUrl: null,
-      images: []
+      title: "Spherify: A Team Collaboration and Project Management Platform for Software Developers",
+      description: "Integrating common tools such as Chats, Video Conferencing, File Sharing, and Task Management into a single platform that aims to solve the problem of Tool Fragmentation causing inefficiencies in workflows among software developers.",
+      technologies: ["MERN", "Socket.io", "Firebase", "Google Cloud"],
+      githubUrl: "https://github.com/cbsdan-tup/spherify",
+      liveUrl: "https://spherify.vercel.app/",
+      images: ["/project-images/Spherify-1.png"]
     },
     {
       id: 3,
-      title: "Weather Dashboard",
-      description: "Responsive weather application with location-based forecasts, interactive maps, and detailed weather analytics.",
-      technologies: ["React", "TypeScript", "Weather API", "CSS Grid"],
-      githubUrl: "https://github.com/yourusername/weather-dashboard",
-      liveUrl: "https://your-weather-app.com",
-      images: []
-    },
-    {
-      id: 4,
-      title: "Social Media Analytics",
-      description: "Dashboard for analyzing social media performance with data visualization and automated reporting.",
-      technologies: ["Vue.js", "Python", "D3.js", "FastAPI"],
-      githubUrl: "https://github.com/yourusername/social-analytics",
-      liveUrl: "https://your-analytics-app.com",
-      images: []
-    },
-    {
-      id: 5,
-      title: "Real-time Chat App",
-      description: "Modern chat application with real-time messaging, file sharing, and user presence indicators.",
-      technologies: ["React", "Socket.io", "Node.js", "Redis"],
-      githubUrl: "https://github.com/yourusername/chat-app",
-      liveUrl: "https://your-chat-app.com",
-      images: []
-    },
-    {
-      id: 6,
-      title: "Machine Learning Dashboard",
-      description: "Interactive dashboard for visualizing ML model performance with real-time predictions and analytics.",
-      technologies: ["Python", "TensorFlow", "React", "Flask"],
-      githubUrl: "https://github.com/yourusername/ml-dashboard",
-      liveUrl: "https://your-ml-dashboard.com",
-      images: []
+      title: "Intrusion Detection System",
+      description: "A machine learning and deep learning-based IDS that uses LSTM and KNN algorithms to classify network attacks using the NSL-KDD dataset. Users input potential intrusion parameters and receive real-time attack classification and alerts. The system aims to enhance cybersecurity by detecting anomalies and informing users to mitigate threats proactively.",
+      technologies: ["Python", "TensorFlow", "Machine Learning", "React"],
+      githubUrl: "https://github.com/cbsdan/intrusion-detection-system",
+      liveUrl: null,
+      images: ["/project-images/IDS-1.png"]
     }
   ]
 
@@ -135,17 +128,17 @@ const Projects = () => {
       if (autoPlayRef.current) {
         clearInterval(autoPlayRef.current)
       }
-      
+
       autoPlayRef.current = setInterval(() => {
         // Don't auto-advance if manual navigation is active
         if (isManualNavigation || isScrollLocked) return
-        
+
         setCurrentSlide(prev => {
           const nextSlide = prev + 1
           // Loop back to first slide when reaching the end
           return nextSlide >= featuredProjects.length ? 0 : nextSlide
         })
-      }, 5000) // 5 seconds interval
+      }, 7000) // 7 seconds interval
     }
 
     const stopAutoPlay = () => {
@@ -180,12 +173,12 @@ const Projects = () => {
   // Helper function to handle manual navigation
   const handleManualNavigation = () => {
     setIsManualNavigation(true)
-    
+
     // Clear any existing manual timeout
     if (manualTimeoutRef.current) {
       clearTimeout(manualTimeoutRef.current)
     }
-    
+
     // Resume auto-play after 5 seconds of no manual interaction
     manualTimeoutRef.current = setTimeout(() => {
       setIsManualNavigation(false)
@@ -219,38 +212,38 @@ const Projects = () => {
       if (!slideshowRef.current) return
 
       // Completely disable scroll navigation on mobile/tablet devices
-      const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window || 
-                      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window ||
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
       if (isMobile) return
 
       const slideshowRect = slideshowRef.current.getBoundingClientRect()
       const mouseY = e.clientY
-      
+
       // Check if mouse is specifically over the slideshow area
-      const isOverSlideshow = mouseY >= slideshowRect.top && 
-                             mouseY <= slideshowRect.bottom &&
-                             e.clientX >= slideshowRect.left && 
-                             e.clientX <= slideshowRect.right
+      const isOverSlideshow = mouseY >= slideshowRect.top &&
+        mouseY <= slideshowRect.bottom &&
+        e.clientX >= slideshowRect.left &&
+        e.clientX <= slideshowRect.right
 
       if (isOverSlideshow) {
         if (!isScrollLocked) {
           const deltaY = e.deltaY
-          
+
           // Check if we're at the boundaries and should allow main scroll
           const isAtLastSlide = currentSlide === featuredProjects.length - 1
           const isAtFirstSlide = currentSlide === 0
-          
+
           // Allow main scroll if at boundaries
           if ((deltaY > 0 && isAtLastSlide) || (deltaY < 0 && isAtFirstSlide)) {
             // Don't prevent default - allow normal page scroll
             return true
           }
-          
+
           // We're not at boundaries, handle slideshow navigation
           e.preventDefault()
           e.stopPropagation()
           e.stopImmediatePropagation()
-          
+
           // Simple direct navigation - no accumulator to prevent double scrolling
           if (Math.abs(deltaY) > 10) { // Minimum scroll threshold
             if (deltaY > 0 && currentSlide < featuredProjects.length - 1) {
@@ -267,7 +260,7 @@ const Projects = () => {
               setTimeout(() => setIsScrollLocked(false), 700)
             }
           }
-          
+
           // Return false to ensure no further event handling for slideshow navigation
           return false
         } else {
@@ -292,15 +285,15 @@ const Projects = () => {
   useEffect(() => {
     const handleTouchStart = (e) => {
       if (!slideshowRef.current) return
-      
+
       const slideshowRect = slideshowRef.current.getBoundingClientRect()
       const touch = e.touches[0]
-      
+
       // Check if touch is over the slideshow area
-      const isOverSlideshow = touch.clientY >= slideshowRect.top && 
-                             touch.clientY <= slideshowRect.bottom &&
-                             touch.clientX >= slideshowRect.left && 
-                             touch.clientX <= slideshowRect.right
+      const isOverSlideshow = touch.clientY >= slideshowRect.top &&
+        touch.clientY <= slideshowRect.bottom &&
+        touch.clientX >= slideshowRect.left &&
+        touch.clientX <= slideshowRect.right
 
       if (isOverSlideshow) {
         startX.current = touch.clientX
@@ -313,24 +306,24 @@ const Projects = () => {
 
       const slideshowRect = slideshowRef.current.getBoundingClientRect()
       const touch = e.touches[0]
-      
+
       // Check if touch is still over the slideshow area
-      const isOverSlideshow = touch.clientY >= slideshowRect.top && 
-                             touch.clientY <= slideshowRect.bottom &&
-                             touch.clientX >= slideshowRect.left && 
-                             touch.clientX <= slideshowRect.right
+      const isOverSlideshow = touch.clientY >= slideshowRect.top &&
+        touch.clientY <= slideshowRect.bottom &&
+        touch.clientX >= slideshowRect.left &&
+        touch.clientX <= slideshowRect.right
 
       if (isOverSlideshow && !isScrollLocked) {
         const currentX = touch.clientX
         const currentY = touch.clientY
         const diffX = startX.current - currentX
         const diffY = startY.current - currentY
-        
+
         // Check if it's more horizontal than vertical movement
         if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 60) {
           e.preventDefault()
           e.stopPropagation()
-          
+
           if (diffX > 0 && currentSlide < featuredProjects.length - 1) {
             // Swipe left - go to next
             setCurrentSlide(prev => prev + 1)
@@ -395,12 +388,12 @@ const Projects = () => {
             </div>
           </div> */}
         </div>
-        
+
         {/* Stacked Projects Slideshow */}
         <div className="projects-slideshow" ref={slideshowRef}>
           <div className="slideshow-container">
             {/* Manual Navigation Buttons */}
-            <button 
+            <button
               className="nav-button nav-button-prev"
               onClick={goToPrevSlide}
               disabled={currentSlide === 0}
@@ -408,7 +401,7 @@ const Projects = () => {
             >
               <span>‹</span>
             </button>
-            <button 
+            <button
               className="nav-button nav-button-next"
               onClick={goToNextSlide}
               disabled={currentSlide === featuredProjects.length - 1}
@@ -470,9 +463,9 @@ const Projects = () => {
                       pointerEvents: position === 0 ? 'auto' : 'none'
                     }}
                   >
-                    <ProjectCard 
-                      project={project} 
-                      index={index} 
+                    <ProjectCard
+                      project={project}
+                      index={index}
                       isActive={position === 0}
                     />
                   </div>
@@ -480,7 +473,7 @@ const Projects = () => {
               })}
             </div>
           </div>
-          
+
           {/* Slide Indicators */}
           <div className="slide-indicators">
             {featuredProjects.map((_, index) => (
@@ -496,14 +489,16 @@ const Projects = () => {
           </div>
 
           {/* Show All Projects Toggle */}
-          <div className="projects-toggle">
-            <button 
-              className="btn btn-outline show-all-btn"
-              onClick={handleShowAllToggle}
-            >
-              {showAllProjects ? 'Show Less Projects' : `Show All ${projects.length} Projects`}
-            </button>
-          </div>
+          {
+            projects.length > 5 && <div className="projects-toggle">
+              <button
+                className="btn btn-outline show-all-btn"
+                onClick={handleShowAllToggle}
+              >
+                {showAllProjects ? 'Show Less Projects' : `Show All ${projects.length} Projects`}
+              </button>
+            </div>
+          }
 
         </div>
       </div>
