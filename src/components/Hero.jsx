@@ -65,7 +65,7 @@ const Hero = () => {
               onClick={downloadResume}
               title="Download my resume"
             >
-              <i class="fa-solid fa-download"></i> &nbsp; Download Resume
+              <i class="fa-solid fa-download"></i> &nbsp; Download Curriculum Vitae
             </button>
             <button
               className="btn btn-secondary btn-contact"

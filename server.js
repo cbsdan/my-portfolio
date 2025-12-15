@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import nodemailer from 'nodemailer';
+import { createTransport } from 'nodemailer';
 
 dotenv.config();
 
@@ -19,7 +19,7 @@ app.post('/api/contact', async (req, res) => {
   }
 
   try {
-    const transporter = nodemailer.createTransporter({
+    const transporter = createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
       secure: process.env.SMTP_PORT == 465,

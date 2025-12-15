@@ -1,6 +1,20 @@
 const About = () => {
+  // Calculate years of experience from September 2022
+  const calculateYearsOfExperience = () => {
+    const startDate = new Date(2022, 8, 1); // September 2022 (month is 0-indexed)
+    const today = new Date();
+    const yearsDifference = today.getFullYear() - startDate.getFullYear();
+    const monthDifference = today.getMonth() - startDate.getMonth();
+    
+    // If we haven't reached the anniversary month yet, subtract 1 year
+    const years = monthDifference < 0 ? yearsDifference - 1 : yearsDifference;
+    
+    // Return years with + if there are additional months
+    return years > 0 ? `${years}+` : '0+';
+  };
+
   const stats = [
-    { number: '3+', label: 'Years Experience' },
+    { number: calculateYearsOfExperience(), label: 'Years Experience' },
     { number: '10+', label: 'Projects Completed' },
   ]
 
@@ -64,7 +78,7 @@ const About = () => {
 
             <div className="about-image">
               <div className="image-placeholder">
-                <img src="/my-solo-pic.jpg" alt="Profile" className="profile-image" />
+                <img src="/my-solo-pic.JPG" alt="Profile" className="profile-image" />
               </div>
             </div>
           </div>
