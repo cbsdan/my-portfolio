@@ -1442,17 +1442,32 @@ section {
 /* Highlight Cards */
 .about-highlights {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1rem;
+  justify-content: space-between;
 }
 
 .highlight-card.glass-card {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  padding: 1.25rem;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 1.5rem 1rem;
   opacity: 0;
   animation: fadeInLeft 0.6s ease-out forwards;
+  flex: 1;
+  min-height: 140px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.highlight-card.glass-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-xl);
+  background: var(--primary-color);
 }
 
 .highlight-card .highlight-icon {
@@ -1462,21 +1477,51 @@ section {
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   color: white;
   flex-shrink: 0;
+  transition: var(--transition);
+  z-index: 1;
 }
 
-.highlight-card .highlight-content h4 {
-  margin-bottom: 0.25rem;
+.highlight-card:hover .highlight-icon {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.highlight-card .highlight-title {
+  margin: 0;
   color: var(--text-primary);
-  font-size: 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: var(--transition);
+  z-index: 1;
 }
 
-.highlight-card .highlight-content p {
+.highlight-card:hover .highlight-title {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.highlight-card .highlight-description {
   color: var(--text-secondary);
   margin: 0;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0;
+  transition: all 0.4s ease;
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  right: 1rem;
+  transform: translateY(-50%) scale(0.9);
+  z-index: 2;
+}
+
+.highlight-card:hover .highlight-description {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+  color: white;
 }
 
 /* Interests Section */
@@ -3725,6 +3770,21 @@ section {
   
   .about-text .section-tag {
     justify-content: center;
+  }
+  
+  .about-highlights {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .highlight-card.glass-card {
+    min-height: 120px;
+  }
+  
+  .highlight-card .highlight-description {
+    opacity: 1;
+    max-height: 100px;
+    position: static;
   }
   
   .highlight-cards {

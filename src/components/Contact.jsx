@@ -103,7 +103,48 @@ const Contact = () => {
         </div>
         
         <div className={`contact-content ${isVisible ? 'visible' : ''}`}>
-          <div className="contact-info">
+
+          
+          <div className="contact-methods">
+            <div className="methods-grid">
+              {contactMethods.map((method, index) => (
+                <a
+                  key={index}
+                  href={method.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-method glass-card"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="method-icon" style={{ background: method.color }}>
+                    <i className={method.icon}></i>
+                  </div>
+                  <div className="method-content">
+                    <h4>{method.title}</h4>
+                    <p className="method-subtitle">{method.subtitle}</p>
+                    <span className="method-action">{method.action} <i className="fa-solid fa-arrow-right"></i></span>
+                  </div>
+                </a>
+              ))}
+            </div>
+            
+            {/* Direct Email Card */}
+            <div className="direct-email-card glass-card">
+              <div className="email-icon">
+                <i className="fa-solid fa-at"></i>
+              </div>
+              <div className="email-content">
+                <h4>Prefer Email?</h4>
+                <p>You can also reach me directly at:</p>
+                <a href="mailto:cabasadaniel1@gmail.com" className="email-link">
+                  <span>cabasadaniel1@gmail.com</span>
+                  <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+          
+          </div>
+                    <div className="contact-info">
             
             {/* Contact Form */}
             <div className="contact-form-container glass-card">
@@ -184,46 +225,6 @@ const Contact = () => {
                 )}
               </form>
             </div>
-          </div>
-          
-          <div className="contact-methods">
-            <div className="methods-grid">
-              {contactMethods.map((method, index) => (
-                <a
-                  key={index}
-                  href={method.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="contact-method glass-card"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="method-icon" style={{ background: method.color }}>
-                    <i className={method.icon}></i>
-                  </div>
-                  <div className="method-content">
-                    <h4>{method.title}</h4>
-                    <p className="method-subtitle">{method.subtitle}</p>
-                    <span className="method-action">{method.action} <i className="fa-solid fa-arrow-right"></i></span>
-                  </div>
-                </a>
-              ))}
-            </div>
-            
-            {/* Direct Email Card */}
-            <div className="direct-email-card glass-card">
-              <div className="email-icon">
-                <i className="fa-solid fa-at"></i>
-              </div>
-              <div className="email-content">
-                <h4>Prefer Email?</h4>
-                <p>You can also reach me directly at:</p>
-                <a href="mailto:cabasadaniel1@gmail.com" className="email-link">
-                  <span>cabasadaniel1@gmail.com</span>
-                  <i className="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
-              </div>
-            </div>
-          
           </div>
         </div>
       </div>

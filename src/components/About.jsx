@@ -38,8 +38,6 @@ const About = () => {
   const stats = [
     { number: calculateYearsOfExperience(), label: 'Years Experience', icon: 'fa-solid fa-calendar-check' },
     { number: '10+', label: 'Projects Completed', icon: 'fa-solid fa-folder-open' },
-    { number: '5+', label: 'Technologies Mastered', icon: 'fa-solid fa-code' },
-    { number: '∞', label: 'Coffee Consumed', icon: 'fa-solid fa-mug-hot' },
   ]
 
   const highlights = [
@@ -139,24 +137,21 @@ const About = () => {
                   <div className="highlight-icon" style={{ background: item.color }}>
                     <i className={item.icon}></i>
                   </div>
-                  <div className="highlight-content">
-                    <h4>{item.title}</h4>
-                    <p>{item.description}</p>
-                  </div>
+                  <h4 className="highlight-title">{item.title}</h4>
+                  <p className="highlight-description">{item.description}</p>
                 </div>
               ))}
             </div>
 
             {/* Fun facts or interests */}
-            <div className="about-interests">
+            {/* <div className="about-interests">
               <h4>When I'm not coding, you'll find me:</h4>
               <div className="interests-list">
                 <span className="interest-tag"><i className="fa-solid fa-gamepad"></i> Gaming</span>
                 <span className="interest-tag"><i className="fa-solid fa-book"></i> Learning</span>
                 <span className="interest-tag"><i className="fa-solid fa-music"></i> Listening to Music</span>
-                <span className="interest-tag"><i className="fa-solid fa-coffee"></i> Coffee Brewing</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
