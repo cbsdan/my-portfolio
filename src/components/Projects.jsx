@@ -83,6 +83,7 @@ const Projects = () => {
   const [isManualNavigation, setIsManualNavigation] = useState(false)
   const [selectedProject, setSelectedProject] = useState(null)
   const [isImageFullscreen, setIsImageFullscreen] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const slideshowRef = useRef(null)
   const startX = useRef(0)
   const startY = useRef(0)
@@ -116,6 +117,24 @@ const Projects = () => {
       githubUrl: "https://github.com/cbsdan/intrusion-detection-system",
       liveUrl: null,
       images: ["/project-images/IDS-1.png"]
+    },
+    {
+      id: 4,
+      title: "FoodScan: AI-Based Nutrient Estimation from Food Images",
+      description: "FoodScan is a mobile application that estimates nutritional values from food images using dual AI pipelines: a PyTorch-based ResNet50 deep learning model and Google Gemini API for vision-based nutrient analysis. It enables automated calorie and macronutrient estimation to support dietary tracking, fitness monitoring, and healthcare use cases.",
+      technologies: ["React Native", "PyTorch", "Python", "ResNet50", "Gemini API", "REST API"],
+      githubUrl: "https://github.com/cbsdan/foodscan",
+      liveUrl: null,
+      images: ["/project-images/FoodScan1.png", "/project-images/FoodScan2.png", "/project-images/FoodScan3.png", "/project-images/FoodScan4.png", "/project-images/FoodScan5.png", "/project-images/FoodScan1.png"]
+    },
+    {
+      id: 5,
+      title: "Armys Angels Integrated School Website",
+      description: "A responsive school website built using HTML, CSS, and Bootstrap to showcase institutional information, academic offerings, and announcements. The project highlights Bootstrap’s grid system, components, and responsive utilities to deliver a clean, accessible, and mobile-friendly layout for a secondary school.",
+      technologies: ["HTML", "CSS", "Bootstrap"],
+      githubUrl: "https://github.com/cbsdan/aais-website",
+      liveUrl: "https://aais-website.vercel.app/",
+      images: ["/project-images/AAIS-1.png", "/project-images/AAIS-2.png", "/project-images/AAIS-3.png"]
     }
   ]
 
@@ -378,34 +397,54 @@ const Projects = () => {
   // Open project detail view
   const openProjectDetail = (project) => {
     setSelectedProject(project)
+    setCurrentImageIndex(0)
     document.body.style.overflow = 'hidden'
   }
 
   // Close project detail view
   const closeProjectDetail = () => {
     setIsImageFullscreen(false)
+    setCurrentImageIndex(0)
     setTimeout(() => {
       setSelectedProject(null)
       document.body.style.overflow = 'auto'
     }, 300)
   }
 
-  // Navigate to next project in detail view
+  // Navigate to next project in detail view (infinite scroll)
   const goToNextProject = () => {
     if (!selectedProject) return
     const currentIndex = projects.findIndex(p => p.id === selectedProject.id)
-    if (currentIndex < projects.length - 1) {
-      setSelectedProject(projects[currentIndex + 1])
-    }
+    const nextIndex = currentIndex < projects.length - 1 ? currentIndex + 1 : 0
+    setSelectedProject(projects[nextIndex])
+    setCurrentImageIndex(0)
   }
 
-  // Navigate to previous project in detail view
+  // Navigate to previous project in detail view (infinite scroll)
   const goToPrevProject = () => {
     if (!selectedProject) return
     const currentIndex = projects.findIndex(p => p.id === selectedProject.id)
-    if (currentIndex > 0) {
-      setSelectedProject(projects[currentIndex - 1])
-    }
+    const prevIndex = currentIndex > 0 ? currentIndex - 1 : projects.length - 1
+    setSelectedProject(projects[prevIndex])
+    setCurrentImageIndex(0)
+  }
+
+  // Navigate to next image
+  const goToNextImage = (e) => {
+    e?.stopPropagation()
+    if (!selectedProject || selectedProject.images.length <= 1) return
+    setCurrentImageIndex(prev =>
+      prev < selectedProject.images.length - 1 ? prev + 1 : 0
+    )
+  }
+
+  // Navigate to previous image
+  const goToPrevImage = (e) => {
+    e?.stopPropagation()
+    if (!selectedProject || selectedProject.images.length <= 1) return
+    setCurrentImageIndex(prev =>
+      prev > 0 ? prev - 1 : selectedProject.images.length - 1
+    )
   }
 
   // Handle keyboard navigation
@@ -414,13 +453,20 @@ const Projects = () => {
 
     const handleKeyPress = (e) => {
       if (e.key === 'Escape') closeProjectDetail()
-      if (e.key === 'ArrowRight') goToNextProject()
-      if (e.key === 'ArrowLeft') goToPrevProject()
+      // When shift is held, navigate between projects
+      if (e.shiftKey) {
+        if (e.key === 'ArrowRight') goToNextProject()
+        if (e.key === 'ArrowLeft') goToPrevProject()
+      } else {
+        // Otherwise navigate between images
+        if (e.key === 'ArrowRight') goToNextImage()
+        if (e.key === 'ArrowLeft') goToPrevImage()
+      }
     }
 
     window.addEventListener('keydown', handleKeyPress)
     return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [selectedProject])
+  }, [selectedProject, currentImageIndex])
 
   return (
     <section id="projects" className="projects-section">
@@ -556,7 +602,7 @@ const Projects = () => {
         {selectedProject && (
           <div className={`project-detail-overlay ${selectedProject ? 'active' : ''}`}>
             <div className="project-detail-backdrop" onClick={closeProjectDetail}></div>
-            
+
             <div className="project-detail-container">
               {/* Close Button */}
               <button className="detail-close-btn" onClick={closeProjectDetail} aria-label="Close">
@@ -565,43 +611,109 @@ const Projects = () => {
                 </svg>
               </button>
 
-              {/* Navigation Buttons */}
-              {projects.findIndex(p => p.id === selectedProject.id) > 0 && (
+              {/* Project Navigation - Bottom Bar */}
+              <div className="detail-project-nav-bar">
                 <button className="detail-nav-btn detail-prev-btn" onClick={goToPrevProject} aria-label="Previous project">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                   </svg>
+                  <span>Previous</span>
                 </button>
-              )}
-              
-              {projects.findIndex(p => p.id === selectedProject.id) < projects.length - 1 && (
+                <div className="project-counter">
+                  <span>{projects.findIndex(p => p.id === selectedProject.id) + 1} / {projects.length}</span>
+                </div>
                 <button className="detail-nav-btn detail-next-btn" onClick={goToNextProject} aria-label="Next project">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <span>Next</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
-              )}
+              </div>
 
               {/* Content */}
               <div className={`project-detail-content ${isImageFullscreen ? 'image-fullscreen' : ''}`}>
                 {/* Image Section */}
                 <div className="detail-image-section">
                   {selectedProject.images.length > 0 ? (
-                    <div 
-                      className="detail-image-wrapper"
-                      onClick={() => setIsImageFullscreen(!isImageFullscreen)}
-                    >
-                      <img 
-                        src={selectedProject.images[0]} 
-                        alt={selectedProject.title}
-                        className="detail-project-image"
-                      />
-                      <div className="image-zoom-hint">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                        </svg>
-                        <span>{isImageFullscreen ? 'Click to exit fullscreen' : 'Click to view fullscreen'}</span>
+                    <div className="detail-image-container">
+                      {/* Image Navigation Buttons */}
+                      {selectedProject.images.length > 1 && (
+                        <>
+                          <button
+                            className="image-nav-btn image-prev-btn"
+                            onClick={goToPrevImage}
+                            aria-label="Previous image"
+                          >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                          </button>
+                          <button
+                            className="image-nav-btn image-next-btn"
+                            onClick={goToNextImage}
+                            aria-label="Next image"
+                          >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                          </button>
+                        </>
+                      )}
+
+                      <div className="detail-image-wrapper">
+                        <img
+                          src={selectedProject.images[currentImageIndex]}
+                          alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                          className="detail-project-image"
+                        />
                       </div>
+                      
+                      {/* Fullscreen Toggle Button */}
+                      <button 
+                        className="fullscreen-toggle-btn"
+                        onClick={() => setIsImageFullscreen(!isImageFullscreen)}
+                        aria-label={isImageFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+                      >
+                        {isImageFullscreen ? (
+                          <>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 9l6 6 6-6" />
+                            </svg>
+                            <span>Exit Fullscreen</span>
+                          </>
+                        ) : (
+                          <>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                            </svg>
+                            <span>Fullscreen</span>
+                          </>
+                        )}
+                      </button>
+
+                      {/* Image Indicators */}
+                      {selectedProject.images.length > 1 && (
+                        <div className="image-indicators">
+                          {selectedProject.images.map((_, idx) => (
+                            <button
+                              key={idx}
+                              className={`image-indicator ${idx === currentImageIndex ? 'active' : ''}`}
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                setCurrentImageIndex(idx)
+                              }}
+                              aria-label={`Go to image ${idx + 1}`}
+                            />
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Image Counter */}
+                      {selectedProject.images.length > 1 && (
+                        <div className="image-counter">
+                          <span>{currentImageIndex + 1} / {selectedProject.images.length}</span>
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <div className="detail-placeholder-image">
@@ -641,7 +753,7 @@ const Projects = () => {
                       className="detail-btn detail-btn-github"
                     >
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                       </svg>
                       <span>View Code</span>
                     </a>
@@ -661,7 +773,7 @@ const Projects = () => {
                   </div>
 
                   <div className="detail-navigation-hint">
-                    <p>Use <kbd>←</kbd> <kbd>→</kbd> arrow keys or <kbd>Esc</kbd> to navigate</p>
+                    <p>Use <kbd>←</kbd> <kbd>→</kbd> for images • <kbd>Shift</kbd> + <kbd>←</kbd> <kbd>→</kbd> for projects • <kbd>Esc</kbd> to close</p>
                   </div>
                 </div>
               </div>
