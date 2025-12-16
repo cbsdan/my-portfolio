@@ -1075,82 +1075,6 @@ body {
   50% { transform: translateX(-50%) translateY(-10px); }
 }
 
-/* ===== VISITOR COUNTER ===== */
-.visitor-counter {
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 3;
-}
-
-.visitor-counter-inner {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  color: white;
-  position: relative;
-  overflow: hidden;
-}
-
-.counter-glow {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  animation: counter-shine 3s infinite;
-}
-
-@keyframes counter-shine {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-.counter-icon {
-  font-size: 1.5rem;
-  opacity: 0.9;
-}
-
-.counter-content {
-  text-align: left;
-}
-
-.counter-number {
-  font-size: 1.5rem;
-  font-weight: 700;
-  display: block;
-  transition: transform 0.3s;
-}
-
-.counter-number.pulse {
-  animation: counter-pulse 0.5s ease-out;
-}
-
-@keyframes counter-pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-
-.counter-label {
-  font-size: 0.75rem;
-  opacity: 0.8;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.counter-since {
-  font-size: 0.65rem;
-  opacity: 0.6;
-  margin-top: 0.25rem;
-}
-
 /* ===== SECTION STYLES ===== */
 section {
   padding: 4rem 0 0;
@@ -3106,6 +3030,11 @@ section {
 
 .detail-btn-github {
   background: var(--text-primary);
+  color: white;
+}
+
+[data-theme="dark"] .detail-btn-github {
+  color: var(--primary-dark);
 }
 
 .detail-btn-github:hover {
@@ -3128,25 +3057,7 @@ section {
   transform: scale(1.1);
 }
 
-.detail-navigation-hint {
-  text-align: center;
-  color: var(--text-light);
-  font-size: 0.9rem;
-  padding: 1.5rem;
-  background: var(--bg-secondary);
-  border-radius: var(--border-radius);
-}
 
-.detail-navigation-hint kbd {
-  padding: 0.25rem 0.5rem;
-  background: var(--bg-primary);
-  border: 1px solid var(--text-light);
-  border-radius: 4px;
-  font-family: monospace;
-  font-size: 0.85rem;
-  margin: 0 0.25rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 /* Responsive Design */
 @media (max-width: 1200px) {
@@ -3294,9 +3205,6 @@ section {
     flex-direction: column;
   }
   
-  .detail-navigation-hint {
-    display: none;
-  }
 }
 
 @media (max-width: 640px) {
@@ -4666,17 +4574,6 @@ section {
 @media (max-width: 768px) {
   .hero-visual {
     margin-top: 2rem;
-  }
-  
-  .visitor-counter {
-    padding: 0.6rem 1rem;
-    font-size: 0.8rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .counter-divider {
-    display: none;
   }
   
   .scroll-indicator {

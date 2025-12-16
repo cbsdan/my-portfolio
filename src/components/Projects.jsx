@@ -93,21 +93,21 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "Acadena: A Decentralized Academic Records System",
-      description: "Acadena is a decentralized platform that utilize blockchain for managing academic records—secure, verifiable, and accessible for both students and institutions.",
-      technologies: ["React", "Motoko", "Internet Identity", "Blockchain"],
-      githubUrl: "https://github.com/cbsdan/Acadena",
-      liveUrl: "https://tcm44-raaaa-aaaab-qbzya-cai.icp0.io",
-      images: ["/project-images/Acadena-2.png"]
-    },
-    {
-      id: 2,
       title: "Spherify: A Team Collaboration and Project Management Platform for Software Developers",
       description: "Integrating common tools such as Chats, Video Conferencing, File Sharing, and Task Management into a single platform that aims to solve the problem of Tool Fragmentation causing inefficiencies in workflows among software developers.",
       technologies: ["MERN", "Socket.io", "Firebase", "Google Cloud"],
       githubUrl: "https://github.com/cbsdan-tup/spherify",
       liveUrl: "https://spherify.vercel.app/",
       images: ["/project-images/Spherify-1.png"]
+    },
+    {
+      id: 2,
+      title: "Acadena: A Decentralized Academic Records System",
+      description: "Acadena is a decentralized platform that utilize blockchain for managing academic records—secure, verifiable, and accessible for both students and institutions.",
+      technologies: ["React", "Motoko", "Internet Identity", "Blockchain"],
+      githubUrl: "https://github.com/cbsdan/Acadena",
+      liveUrl: "https://tcm44-raaaa-aaaab-qbzya-cai.icp0.io",
+      images: ["/project-images/Acadena-2.png"]
     },
     {
       id: 3,
@@ -125,7 +125,7 @@ const Projects = () => {
       technologies: ["React Native", "PyTorch", "Python", "ResNet50", "Gemini API", "REST API"],
       githubUrl: "https://github.com/cbsdan/foodscan",
       liveUrl: null,
-      images: ["/project-images/FoodScan1.png", "/project-images/FoodScan2.png", "/project-images/FoodScan3.png", "/project-images/FoodScan4.png", "/project-images/FoodScan5.png", "/project-images/FoodScan1.png"]
+      images: ["/project-images/FoodScan1.png", "/project-images/FoodScan2.png", "/project-images/FoodScan3.png", "/project-images/FoodScan4.png", "/project-images/FoodScan5.png"]
     },
     {
       id: 5,
@@ -212,95 +212,16 @@ const Projects = () => {
     setCurrentSlide(0) // Reset to first slide
   }
 
-  // Manual navigation functions
+  // Manual navigation functions with infinite scroll
   const goToNextSlide = () => {
-    if (currentSlide < featuredProjects.length - 1) {
-      setCurrentSlide(curr => curr + 1)
-    }
+    setCurrentSlide(curr => (curr + 1) % featuredProjects.length)
     handleManualNavigation()
   }
 
   const goToPrevSlide = () => {
-    if (currentSlide > 0) {
-      setCurrentSlide(curr => curr - 1)
-    }
+    setCurrentSlide(curr => (curr - 1 + featuredProjects.length) % featuredProjects.length)
     handleManualNavigation()
   }
-
-  // Handle wheel event for scroll-based navigation (desktop only)
-  useEffect(() => {
-    const handleWheel = (e) => {
-      if (!slideshowRef.current) return
-
-      // Completely disable scroll navigation on mobile/tablet devices
-      const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window ||
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-      if (isMobile) return
-
-      const slideshowRect = slideshowRef.current.getBoundingClientRect()
-      const mouseY = e.clientY
-
-      // Check if mouse is specifically over the slideshow area
-      const isOverSlideshow = mouseY >= slideshowRect.top &&
-        mouseY <= slideshowRect.bottom &&
-        e.clientX >= slideshowRect.left &&
-        e.clientX <= slideshowRect.right
-
-      if (isOverSlideshow) {
-        if (!isScrollLocked) {
-          const deltaY = e.deltaY
-
-          // Check if we're at the boundaries and should allow main scroll
-          const isAtLastSlide = currentSlide === featuredProjects.length - 1
-          const isAtFirstSlide = currentSlide === 0
-
-          // Allow main scroll if at boundaries
-          if ((deltaY > 0 && isAtLastSlide) || (deltaY < 0 && isAtFirstSlide)) {
-            // Don't prevent default - allow normal page scroll
-            return true
-          }
-
-          // We're not at boundaries, handle slideshow navigation
-          e.preventDefault()
-          e.stopPropagation()
-          e.stopImmediatePropagation()
-
-          // Simple direct navigation - no accumulator to prevent double scrolling
-          if (Math.abs(deltaY) > 10) { // Minimum scroll threshold
-            if (deltaY > 0 && currentSlide < featuredProjects.length - 1) {
-              // Scroll down - go to next
-              setCurrentSlide(curr => curr + 1)
-              setIsScrollLocked(true)
-              handleManualNavigation()
-              setTimeout(() => setIsScrollLocked(false), 700)
-            } else if (deltaY < 0 && currentSlide > 0) {
-              // Scroll up - go to previous
-              setCurrentSlide(curr => curr - 1)
-              setIsScrollLocked(true)
-              handleManualNavigation()
-              setTimeout(() => setIsScrollLocked(false), 700)
-            }
-          }
-
-          // Return false to ensure no further event handling for slideshow navigation
-          return false
-        } else {
-          // If scroll is locked, still prevent main scroll to avoid conflicts
-          e.preventDefault()
-          e.stopPropagation()
-          e.stopImmediatePropagation()
-          return false
-        }
-      }
-    }
-
-    // Use capture phase to intercept events earlier
-    document.addEventListener('wheel', handleWheel, { passive: false, capture: true })
-
-    return () => {
-      document.removeEventListener('wheel', handleWheel, { capture: true })
-    }
-  }, [currentSlide, featuredProjects.length, isScrollLocked])
 
   // Handle touch events for mobile/tablet - horizontal swipes
   useEffect(() => {
@@ -345,17 +266,17 @@ const Projects = () => {
           e.preventDefault()
           e.stopPropagation()
 
-          if (diffX > 0 && currentSlide < featuredProjects.length - 1) {
-            // Swipe left - go to next
-            setCurrentSlide(prev => prev + 1)
+          if (diffX > 0) {
+            // Swipe left - go to next (with infinite scroll)
+            setCurrentSlide(prev => (prev + 1) % featuredProjects.length)
             setIsScrollLocked(true)
             handleManualNavigation()
             setTimeout(() => setIsScrollLocked(false), 700)
             startX.current = 0
             startY.current = 0
-          } else if (diffX < 0 && currentSlide > 0) {
-            // Swipe right - go to previous
-            setCurrentSlide(prev => prev - 1)
+          } else if (diffX < 0) {
+            // Swipe right - go to previous (with infinite scroll)
+            setCurrentSlide(prev => (prev - 1 + featuredProjects.length) % featuredProjects.length)
             setIsScrollLocked(true)
             handleManualNavigation()
             setTimeout(() => setIsScrollLocked(false), 700)
@@ -491,7 +412,6 @@ const Projects = () => {
             <button
               className="nav-button nav-button-prev"
               onClick={goToPrevSlide}
-              disabled={currentSlide === 0}
               aria-label="Previous project"
             >
               <span>‹</span>
@@ -499,7 +419,6 @@ const Projects = () => {
             <button
               className="nav-button nav-button-next"
               onClick={goToNextSlide}
-              disabled={currentSlide === featuredProjects.length - 1}
               aria-label="Next project"
             >
               <span>›</span>
@@ -507,7 +426,16 @@ const Projects = () => {
 
             <div className="stacked-cards">
               {featuredProjects.map((project, index) => {
-                const position = index - currentSlide
+                // Calculate circular position
+                let position = index - currentSlide
+                const totalProjects = featuredProjects.length
+                
+                // Normalize position for circular navigation
+                if (position < -Math.floor(totalProjects / 2)) {
+                  position += totalProjects
+                } else if (position > Math.floor(totalProjects / 2)) {
+                  position -= totalProjects
+                }
 
                 let className = 'stacked-card'
                 let zIndex = 50
@@ -770,10 +698,6 @@ const Projects = () => {
                         <span>Live Demo</span>
                       </a>
                     )}
-                  </div>
-
-                  <div className="detail-navigation-hint">
-                    <p>Use <kbd>←</kbd> <kbd>→</kbd> for images • <kbd>Shift</kbd> + <kbd>←</kbd> <kbd>→</kbd> for projects • <kbd>Esc</kbd> to close</p>
                   </div>
                 </div>
               </div>
