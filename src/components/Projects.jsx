@@ -129,6 +129,15 @@ const Projects = () => {
     },
     {
       id: 5,
+      title: "CookingMamau: Recipe and Cooking Web App",
+      description: "CookingMamau is a full-stack web application built with Laravel (PHP) and JavaScript that allows users to browse, manage, and explore food recipes. The project demonstrates server-side MVC architecture, database integration, and dynamic content rendering with modern frontend tools.",
+      technologies: ["Laravel", "PHP", "JavaScript", "Blade", "CSS", "SQL"],
+      githubUrl: "https://github.com/cbsdan/CookingMamau",
+      liveUrl: null,
+      images: ["/project-images/CookingMamau-1.png", "/project-images/CookingMamau-2.png", "/project-images/CookingMamau-3.png", "/project-images/CookingMamau-4.png", "/project-images/CookingMamau-5.png"] 
+    },
+    {
+      id: 6,
       title: "Armys Angels Integrated School Website",
       description: "A responsive school website built using HTML, CSS, and Bootstrap to showcase institutional information, academic offerings, and announcements. The project highlights Bootstrap’s grid system, components, and responsive utilities to deliver a clean, accessible, and mobile-friendly layout for a secondary school.",
       technologies: ["HTML", "CSS", "Bootstrap"],
@@ -138,7 +147,7 @@ const Projects = () => {
     }
   ]
 
-  const featuredProjects = showAllProjects ? projects : projects.slice(0, 5) // Show 5 initially, all when expanded
+  const featuredProjects = showAllProjects ? projects : projects.slice(0, 10) // Show 10 initially, all when expanded
 
   // Auto-play functionality
   useEffect(() => {
@@ -429,7 +438,7 @@ const Projects = () => {
                 // Calculate circular position
                 let position = index - currentSlide
                 const totalProjects = featuredProjects.length
-                
+
                 // Normalize position for circular navigation
                 if (position < -Math.floor(totalProjects / 2)) {
                   position += totalProjects
@@ -595,9 +604,9 @@ const Projects = () => {
                           className="detail-project-image"
                         />
                       </div>
-                      
+
                       {/* Fullscreen Toggle Button */}
-                      <button 
+                      <button
                         className="fullscreen-toggle-btn"
                         onClick={() => setIsImageFullscreen(!isImageFullscreen)}
                         aria-label={isImageFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
