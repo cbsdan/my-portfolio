@@ -116,8 +116,7 @@ const Hero = () => {
           </h1>
 
           <p className="hero-description">
-            I create beautiful, functional, and user-centered digital experiences.
-            Passionate about building scalable web applications with modern technologies.
+            Aspiring  full-stack  developer  with  hands-on  experience  in  MERN  (MongoDB,  Express.js,  React.js,  andNode.js)  stack  and  mobile  application  development. 
           </p>
 
           <div className="hero-buttons">

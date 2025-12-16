@@ -203,7 +203,7 @@ const Contact = () => {
                 
                 <button 
                   type="submit" 
-                  className="btn btn-primary btn-submit btn-3d"
+                  className="btn btn-primary btn-submit btn-3d email-submit"
                   disabled={status.type === 'loading'}
                 >
                   {status.type === 'loading' ? (

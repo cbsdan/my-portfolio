@@ -85,14 +85,30 @@ const About = () => {
               {/* Floating experience badge */}
               <div className="experience-badge glass-card">
                 <div className="badge-content">
-                  <span className="badge-number">{calculateYearsOfExperience()}</span>
-                  <span className="badge-text">Years of<br/>Experience</span>
+                  <span className="badge-number">10+</span>
+                  <span className="badge-text">Projects <br/>Completed</span>
                 </div>
               </div>
             </div>
 
+            {/* Highlights */}
+            <div className="about-highlights">
+              {highlights.map((item, index) => (
+                <div 
+                  key={index} 
+                  className="highlight-card glass-card"
+                  style={{ animationDelay: `${index * 0.15}s` }}
+                >
+                  <div className="highlight-icon" style={{ background: item.color }}>
+                    <i className={item.icon}></i>
+                  </div>
+                  <h4 className="highlight-title">{item.title}</h4>
+                  <p className="highlight-description">{item.description}</p>
+                </div>
+              ))}
+            </div>
             {/* Stats grid */}
-            <div className="stats-grid">
+            {/* <div className="stats-grid">
               {stats.map((stat, index) => (
                 <div 
                   key={index} 
@@ -106,7 +122,7 @@ const About = () => {
                   <div className="stat-label">{stat.label}</div>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Right side - Text content */}
@@ -126,21 +142,25 @@ const About = () => {
               </p>
             </div>
 
-            {/* Highlights */}
-            <div className="about-highlights">
-              {highlights.map((item, index) => (
-                <div 
-                  key={index} 
-                  className="highlight-card glass-card"
-                  style={{ animationDelay: `${index * 0.15}s` }}
-                >
-                  <div className="highlight-icon" style={{ background: item.color }}>
-                    <i className={item.icon}></i>
-                  </div>
-                  <h4 className="highlight-title">{item.title}</h4>
-                  <p className="highlight-description">{item.description}</p>
+            {/* Education Section */}
+            <div className="education-section glass-card">
+              <div className="education-header">
+                <div className="education-icon">
+                  <i className="fa-solid fa-graduation-cap"></i>
                 </div>
-              ))}
+                <h4>Education</h4>
+              </div>
+              <div className="education-content">
+                <h5 className="degree-title">Bachelor of Science in Information Technology (BSIT)</h5>
+                <p className="institution">
+                  <i className="fa-solid fa-building-columns"></i>
+                  Technological University of the Philippines - Taguig
+                </p>
+                <div className="honors-badge">
+                  <i className="fa-solid fa-award"></i>
+                  <span>Dean's Lister and President's Lister (2022-Present)</span>
+                </div>
+              </div>
             </div>
 
             {/* Fun facts or interests */}
