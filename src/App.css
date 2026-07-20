@@ -38,6 +38,24 @@
 }
 
 /* ---- Section Common ---- */
+.section-divider {
+  border: 0;
+  height: 1px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--border-subtle) 15%,
+    rgba(var(--primary-rgb), 0.35) 50%,
+    var(--border-subtle) 85%,
+    transparent 100%
+  );
+  opacity: 0.8;
+  position: relative;
+  z-index: 1;
+}
+
 .section-header {
   text-align: center;
   margin-bottom: 60px;
@@ -2202,8 +2220,6 @@
 /* Primary Trigger Card */
 .message-trigger-card {
   cursor: pointer;
-  border: 1px solid rgba(139, 92, 246, 0.35);
-  background: rgba(139, 92, 246, 0.08);
 }
 
 .message-trigger-card:hover {

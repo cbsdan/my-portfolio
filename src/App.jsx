@@ -50,10 +50,15 @@ function App() {
         <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
         <main className="main-content">
           <Hero />
-          <About />
-          <Experience />
+          <hr className="section-divider" />
           <Projects />
+          <hr className="section-divider" />
+          <About />
+          <hr className="section-divider" />
+          <Experience />
+          <hr className="section-divider" />
           <Skills />
+          <hr className="section-divider" />
           <Contact />
         </main>
         <footer className="footer">
