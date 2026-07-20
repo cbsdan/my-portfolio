@@ -1,6 +1,13 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const ThemeContext = createContext();
+
+export const themes = [
+  { id: 'midnight-cosmos', name: 'Midnight Cosmos', emoji: '🌌', description: 'Deep navy & electric blue' },
+  { id: 'aurora-borealis', name: 'Aurora Borealis', emoji: '🌌', description: 'Northern lights green & teal' },
+  { id: 'sunset-horizon', name: 'Sunset Horizon', emoji: '🌅', description: 'Warm coral & golden' },
+  { id: 'ocean-depths', name: 'Ocean Depths', emoji: '🌊', description: 'Deep sea blues & aqua' },
+];
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);
@@ -11,29 +18,23 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Check localStorage first, then system preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      return savedTheme === 'dark';
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    if (savedTheme && themes.find(t => t.id === savedTheme)) {
+      return savedTheme;
     }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return 'aurora-borealis';
   });
 
   useEffect(() => {
-    // Save theme preference to localStorage
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    
-    // Update CSS custom property for theme
-    document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
-  }, [isDarkMode]);
+    localStorage.setItem('portfolio-theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
-  const toggleTheme = () => {
-    setIsDarkMode(prev => !prev);
-  };
+  const currentTheme = themes.find(t => t.id === theme) || themes[0];
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme, currentTheme, themes }}>
       {children}
     </ThemeContext.Provider>
   );

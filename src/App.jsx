@@ -3,10 +3,13 @@ import { ThemeProvider } from './contexts/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
+import Experience from './components/Experience'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Contact from './components/Contact'
 import AnimatedBackground from './components/AnimatedBackground'
+import ThemeSwitcher from './components/ThemeSwitcher'
+import SocialLinks from './components/SocialLinks'
 import './App.css'
 
 function App() {
@@ -15,13 +18,10 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'projects', 'skills', 'contact']
-      const scrollPosition = window.scrollY + 100
+      const sections = ['hero', 'about', 'experience', 'projects', 'skills', 'contact']
+      const scrollPosition = window.scrollY + 150
 
-      // Show/hide scroll to top button - hide if in hero section or at top
-      const shouldShow = window.scrollY > 300 && activeSection !== 'hero'
-      setShowScrollTop(shouldShow)
-      console.log('Scroll Y:', window.scrollY, 'Active section:', activeSection, 'Show button:', shouldShow) // Debug log
+      setShowScrollTop(window.scrollY > 400)
 
       for (const section of sections) {
         const element = document.getElementById(section)
@@ -35,15 +35,13 @@ function App() {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [activeSection])
+  }, [])
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
-
-  console.log('showScrollTop state:', showScrollTop) // Debug log
 
   return (
     <ThemeProvider>
@@ -52,24 +50,27 @@ function App() {
         <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
         <main className="main-content">
           <Hero />
-          <Projects />
           <About />
+          <Experience />
+          <Projects />
           <Skills />
           <Contact />
         </main>
         <footer className="footer">
-          <div className="footer-content">
-            <p>&copy; 2025 cbsdan. All rights reserved.</p>
+          <div className="footer-content container">
+            <p>&copy; {new Date().getFullYear()} Daniel Cabasa. Built with React.</p>
           </div>
         </footer>
-        
-        {/* Scroll to Top Button */}
-        <button 
+
+        <SocialLinks activeSection={activeSection} />
+        <ThemeSwitcher />
+
+        <button
           className={`scroll-to-top ${showScrollTop ? 'visible' : ''}`}
           onClick={scrollToTop}
           aria-label="Scroll to top"
         >
-          <i class="fa-solid fa-up-long"></i>
+          <i className="fa-solid fa-arrow-up"></i>
         </button>
       </div>
     </ThemeProvider>

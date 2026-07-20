@@ -1,44 +1,239 @@
-:root {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+/* ============================================
+   DESIGN SYSTEM — 5 Theme Definitions
+   ============================================ */
+
+/* ---- Theme 1: Midnight Cosmos (Default) ---- */
+[data-theme="midnight-cosmos"] {
+  --bg-primary: #04040d;
+  --bg-secondary: #070718;
+  --bg-tertiary: #0a0a24;
+  --surface: rgba(12, 12, 40, 0.65);
+  --surface-hover: rgba(20, 20, 60, 0.75);
+  --text-primary: #e8e8ff;
+  --text-secondary: #a0a0d0;
+  --text-muted: #6a6a9a;
+  --primary: #6c63ff;
+  --primary-rgb: 108, 99, 255;
+  --primary-light: #8b83ff;
+  --primary-dark: #4d44db;
+  --secondary: #00d4ff;
+  --secondary-rgb: 0, 212, 255;
+  --accent: #ff6bff;
+  --accent-rgb: 255, 107, 255;
+  --gradient-primary: linear-gradient(135deg, #6c63ff, #00d4ff);
+  --gradient-hero: linear-gradient(135deg, #04040d 0%, #0e0e30 40%, #070718 100%);
+  --gradient-card: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(0, 212, 255, 0.05));
+  --glass-bg: rgba(8, 8, 24, 0.75);
+  --glass-border: rgba(108, 99, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  --glow-primary: 0 0 30px rgba(108, 99, 255, 0.3);
+  --glow-secondary: 0 0 30px rgba(0, 212, 255, 0.3);
+  --border-subtle: rgba(108, 99, 255, 0.12);
+  --scrollbar-track: #070718;
+  --scrollbar-thumb: #6c63ff;
+  --nav-bg: rgba(4, 4, 13, 0.9);
+  --code-bg: rgba(20, 20, 45, 0.5);
+  --particle-color: rgba(108, 99, 255, 0.15);
+}
+
+/* ---- Theme 2: Aurora Borealis ---- */
+[data-theme="aurora-borealis"] {
+  --bg-primary: #030909;
+  --bg-secondary: #061313;
+  --bg-tertiary: #081d1d;
+  --surface: rgba(8, 28, 28, 0.65);
+  --surface-hover: rgba(12, 40, 40, 0.75);
+  --text-primary: #e0fff0;
+  --text-secondary: #90d4b8;
+  --text-muted: #5a9a80;
+  --primary: #00e68a;
+  --primary-rgb: 0, 230, 138;
+  --primary-light: #33ffaa;
+  --primary-dark: #00b36b;
+  --secondary: #00cccc;
+  --secondary-rgb: 0, 204, 204;
+  --accent: #7b68ee;
+  --accent-rgb: 123, 104, 238;
+  --gradient-primary: linear-gradient(135deg, #00e68a, #00cccc);
+  --gradient-hero: linear-gradient(135deg, #030909 0%, #07221a 40%, #061313 100%);
+  --gradient-card: linear-gradient(135deg, rgba(0, 230, 138, 0.1), rgba(0, 204, 204, 0.05));
+  --glass-bg: rgba(6, 20, 20, 0.75);
+  --glass-border: rgba(0, 230, 138, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  --glow-primary: 0 0 30px rgba(0, 230, 138, 0.3);
+  --glow-secondary: 0 0 30px rgba(0, 204, 204, 0.3);
+  --border-subtle: rgba(0, 230, 138, 0.12);
+  --scrollbar-track: #061313;
+  --scrollbar-thumb: #00e68a;
+  --nav-bg: rgba(3, 9, 9, 0.9);
+  --code-bg: rgba(8, 28, 28, 0.5);
+  --particle-color: rgba(0, 230, 138, 0.15);
+}
+
+/* ---- Theme 3: Sunset Horizon ---- */
+[data-theme="sunset-horizon"] {
+  --bg-primary: #0b0604;
+  --bg-secondary: #140b06;
+  --bg-tertiary: #1c0e07;
+  --surface: rgba(24, 12, 7, 0.65);
+  --surface-hover: rgba(36, 18, 10, 0.75);
+  --text-primary: #fff0e0;
+  --text-secondary: #d4a878;
+  --text-muted: #9a7050;
+  --primary: #ff6b35;
+  --primary-rgb: 255, 107, 53;
+  --primary-light: #ff8f60;
+  --primary-dark: #e04d1a;
+  --secondary: #ffc107;
+  --secondary-rgb: 255, 193, 7;
+  --accent: #ff4081;
+  --accent-rgb: 255, 64, 129;
+  --gradient-primary: linear-gradient(135deg, #ff6b35, #ffc107);
+  --gradient-hero: linear-gradient(135deg, #0b0604 0%, #1e0b05 40%, #140b06 100%);
+  --gradient-card: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 193, 7, 0.05));
+  --glass-bg: rgba(16, 8, 4, 0.75);
+  --glass-border: rgba(255, 107, 53, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  --glow-primary: 0 0 30px rgba(255, 107, 53, 0.3);
+  --glow-secondary: 0 0 30px rgba(255, 193, 7, 0.3);
+  --border-subtle: rgba(255, 107, 53, 0.12);
+  --scrollbar-track: #140b06;
+  --scrollbar-thumb: #ff6b35;
+  --nav-bg: rgba(11, 6, 4, 0.9);
+  --code-bg: rgba(24, 12, 7, 0.5);
+  --particle-color: rgba(255, 107, 53, 0.15);
+}
+
+/* ---- Theme 4: Ocean Depths ---- */
+[data-theme="ocean-depths"] {
+  --bg-primary: #02060d;
+  --bg-secondary: #040d18;
+  --bg-tertiary: #061324;
+  --surface: rgba(4, 14, 26, 0.65);
+  --surface-hover: rgba(6, 22, 40, 0.75);
+  --text-primary: #e0f0ff;
+  --text-secondary: #78b4d4;
+  --text-muted: #4a7a9a;
+  --primary: #0ea5e9;
+  --primary-rgb: 14, 165, 233;
+  --primary-light: #38bdf8;
+  --primary-dark: #0284c7;
+  --secondary: #06d6a0;
+  --secondary-rgb: 6, 214, 160;
+  --accent: #8b5cf6;
+  --accent-rgb: 139, 92, 246;
+  --gradient-primary: linear-gradient(135deg, #0ea5e9, #06d6a0);
+  --gradient-hero: linear-gradient(135deg, #02060d 0%, #060e22 40%, #040d18 100%);
+  --gradient-card: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(6, 214, 160, 0.05));
+  --glass-bg: rgba(4, 12, 24, 0.75);
+  --glass-border: rgba(14, 165, 233, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  --glow-primary: 0 0 30px rgba(14, 165, 233, 0.3);
+  --glow-secondary: 0 0 30px rgba(6, 214, 160, 0.3);
+  --border-subtle: rgba(14, 165, 233, 0.12);
+  --scrollbar-track: #040d18;
+  --scrollbar-thumb: #0ea5e9;
+  --nav-bg: rgba(2, 6, 13, 0.9);
+  --code-bg: rgba(4, 14, 26, 0.5);
+  --particle-color: rgba(14, 165, 233, 0.15);
+}
+
+/* ---- Theme 5: Sakura Dream ---- */
+[data-theme="sakura-dream"] {
+  --bg-primary: #eee5de;
+  --bg-secondary: #e8dcd2;
+  --bg-tertiary: #dfd2c6;
+  --surface: rgba(245, 225, 232, 0.75);
+  --surface-hover: rgba(240, 215, 225, 0.85);
+  --text-primary: #2d1f3d;
+  --text-secondary: #6b4f7a;
+  --text-muted: #9a7aaa;
+  --primary: #e91e8c;
+  --primary-rgb: 233, 30, 140;
+  --primary-light: #f54daa;
+  --primary-dark: #c4106f;
+  --secondary: #9c27b0;
+  --secondary-rgb: 156, 39, 176;
+  --accent: #ff6f91;
+  --accent-rgb: 255, 111, 145;
+  --gradient-primary: linear-gradient(135deg, #e91e8c, #ff6f91);
+  --gradient-hero: linear-gradient(135deg, #eee5de 0%, #f4d4e0 40%, #e8dcd2 100%);
+  --gradient-card: linear-gradient(135deg, rgba(233, 30, 140, 0.06), rgba(255, 111, 145, 0.03));
+  --glass-bg: rgba(245, 230, 238, 0.8);
+  --glass-border: rgba(233, 30, 140, 0.15);
+  --glass-shadow: 0 8px 32px rgba(100, 50, 80, 0.12);
+  --glow-primary: 0 0 30px rgba(233, 30, 140, 0.2);
+  --glow-secondary: 0 0 30px rgba(156, 39, 176, 0.2);
+  --border-subtle: rgba(233, 30, 140, 0.1);
+  --scrollbar-track: #e8dcd2;
+  --scrollbar-thumb: #e91e8c;
+  --nav-bg: rgba(238, 229, 222, 0.92);
+  --code-bg: rgba(235, 220, 210, 0.5);
+  --particle-color: rgba(233, 30, 140, 0.1);
+}
+
+/* ============================================
+   BASE RESET & GLOBALS
+   ============================================ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   line-height: 1.6;
-  font-weight: 400;
-  
-  color-scheme: light;
-  color: #333;
-  background-color: #fafafa;
-  
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #fafafa;
+::selection {
+  background: rgba(var(--primary-rgb), 0.3);
+  color: var(--text-primary);
 }
 
-#root {
-  width: 100%;
-  min-height: 100vh;
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+img {
+  max-width: 100%;
+  display: block;
 }
 
-/* Focus styles for accessibility */
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid #2563eb;
-  outline-offset: 2px;
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  line-height: 1.2;
 }

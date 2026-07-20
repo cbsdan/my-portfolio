@@ -1,25 +1,33 @@
 import { useState, useEffect } from 'react'
-import { useTheme } from '../contexts/ThemeContext'
 
 const Navbar = ({ activeSection, setActiveSection }) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { isDarkMode, toggleTheme } = useTheme()
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
     }
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Close mobile menu on resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) setIsMobileMenuOpen(false)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const navItems = [
-    { id: 'hero', label: 'Home', icon: 'fa-solid fa-home' },
-    { id: 'projects', label: 'Projects', icon: 'fa-solid fa-folder' },
-    { id: 'about', label: 'About', icon: 'fa-solid fa-user', hideOnMobile: true },
-    { id: 'skills', label: 'Skills', icon: 'fa-solid fa-code', hideOnMobile: true },
-    { id: 'contact', label: 'Contact', icon: 'fa-solid fa-envelope' }
+    { id: 'hero', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'contact', label: 'Contact' },
   ]
 
   const scrollToSection = (sectionId) => {
@@ -31,11 +39,8 @@ const Navbar = ({ activeSection, setActiveSection }) => {
     setIsMobileMenuOpen(false)
   }
 
-  // Show theme toggle when scrolled down (not at top) or when not on hero section
-  const showThemeToggle = isScrolled || activeSection !== 'hero'
-
   return (
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''} ${activeSection === 'hero' ? 'on-hero' : ''}`}>
+    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="nav-brand" onClick={() => scrollToSection('hero')}>
         <span className="brand-image">
           <img src="/favicon.png" alt="Logo" className="logo" />
@@ -48,33 +53,23 @@ const Navbar = ({ activeSection, setActiveSection }) => {
         {navItems.map((item) => (
           <button
             key={item.id}
-            className={`nav-link ${activeSection === item.id ? 'active' : ''} ${item.hideOnMobile ? 'hide-mobile' : ''}`}
+            className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
             onClick={() => scrollToSection(item.id)}
           >
-            <span className={`nav-indicator`}>{item.label}</span>
-            <span className={`nav-text ${item.hideOnMobile ? 'hide-mobile' : ''}`}>{item.label}</span>
+            <span className="nav-text">{item.label}</span>
           </button>
         ))}
-
-        {showThemeToggle && (
-          <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            title={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
-          >
-            <div className="toggle-icon">
-              {isDarkMode ? (
-                <i className="fa-solid fa-sun"></i>
-              ) : (
-                <i className="fa-solid fa-moon"></i>
-              )}
-            </div>
-          </button>
-        )}
-
       </div>
 
-      
+      <button
+        className={`mobile-menu-btn ${isMobileMenuOpen ? 'open' : ''}`}
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        aria-label="Toggle navigation menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </nav>
   )
 }
