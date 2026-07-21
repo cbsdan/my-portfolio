@@ -38,7 +38,7 @@ const Projects = () => {
       description:
         'A full-stack car rental platform for mobile and web users. Features Google Sign-In authentication, Firebase Cloud Messaging for notifications, and vehicle management with booking capabilities.',
       technologies: ['React Native', 'MERN', 'Google Sign-In', 'FCM'],
-      githubUrl: 'https://github.com/cbsdan/borrow-my-wheels',
+      githubUrl: 'https://github.com/cbsdan/bmw-project',
       liveUrl: null,
       images: [],
       category: 'Mobile',
