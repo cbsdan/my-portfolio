@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import resumePdf from '../assets/DOCabasa_Resume.pdf'
+import resumePdf from '../assets/DOCabasa_CV.pdf'
 
 const Hero = () => {
   const [displayText, setDisplayText] = useState('')
@@ -61,7 +61,7 @@ const Hero = () => {
   const downloadResume = () => {
     const link = document.createElement('a')
     link.href = resumePdf
-    link.download = 'DOCabasa_Resume.pdf'
+    link.download = 'DOCabasa_CV.pdf'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
